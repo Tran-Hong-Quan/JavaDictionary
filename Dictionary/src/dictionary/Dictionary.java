@@ -112,7 +112,7 @@ public class Dictionary {
     public static void main(String[] args) {
         var dic = new Dictionary();
         dic.readDatabase();
-        var mainFrame = new MainFrame();
+        var mainFrame = new FindEnglishWord();
         mainFrame.setDictionary(dic);
         mainFrame.Init();
     }

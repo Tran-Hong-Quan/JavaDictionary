@@ -13,14 +13,12 @@ import java.awt.event.KeyEvent;
 public class MainFrame extends javax.swing.JFrame {
 
     private Dictionary dictionary;
-    private WordFrame wordFrame;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        wordFrame = new WordFrame();
     }
 
     public void setDictionary(Dictionary dictionary) {
@@ -40,144 +38,24 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        showAllSearch = new javax.swing.JScrollPane();
-        searchList = new javax.swing.JList<>();
-        Name = new javax.swing.JLabel();
-        Find = new javax.swing.JButton();
-        inputWord = new javax.swing.JTextField();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
-
-        showAllSearch.setOpaque(true);
-
-        searchList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        searchList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        searchList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                searchListMouseReleased(evt);
-            }
-        });
-        searchList.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                searchListKeyReleased(evt);
-            }
-        });
-        showAllSearch.setViewportView(searchList);
-
-        Name.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
-        Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name.setText("Dictionary");
-
-        Find.setText("Find");
-        Find.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FindActionPerformed(evt);
-            }
-        });
-
-        inputWord.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        inputWord.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                inputWordKeyReleased(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(Name))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(showAllSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(inputWord, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Find, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(62, Short.MAX_VALUE))
+            .addGap(0, 789, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Find, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inputWord, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(showAllSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+            .addGap(0, 581, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
-
-        Word w = dictionary.findEngWord(inputWord.getText());
-        if (w == null) {
-            return;
-        }
-        showWord(w);
-    }//GEN-LAST:event_FindActionPerformed
-
-    public void showWord(Word word) {
-        wordFrame.setWord(word);
-        wordFrame.showWord();
-        wordFrame.setVisible(true);
-    }
-
-    private void inputWordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputWordKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            FindActionPerformed(null);
-            return;
-        }
-
-        var inputText = inputWord.getText();
-
-        if (inputText.equals("")) {
-            showAllSearch.setVisible(false);
-            return;
-        }
-
-        var words = dictionary.findAllEngWordContain(inputText);
-
-        if (words.length != 0) {
-            showAllSearch.setVisible(true);
-            searchList.setListData(words);
-        } else {
-            showAllSearch.setVisible(false);
-        }
-
-    }//GEN-LAST:event_inputWordKeyReleased
-
-    private void searchListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchListMouseReleased
-        if (evt.getClickCount() < 2) {
-            return;
-        }
-        var target = (javax.swing.JList<Word>) evt.getSource();
-        int index = target.locationToIndex(evt.getPoint());
-        if (index >= 0) {
-            Word item = target.getModel().getElementAt(index);
-            showWord(item);
-        }
-    }//GEN-LAST:event_searchListMouseReleased
-
-    private void searchListKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchListKeyReleased
-        if(evt.getKeyCode()!= KeyEvent.VK_ENTER){
-            return;
-        }
-        showWord(searchList.getSelectedValue());
-    }//GEN-LAST:event_searchListKeyReleased
 
     /**
      * @param args the command line arguments
@@ -205,6 +83,9 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -216,14 +97,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void Init() {
         setVisible(true);
-        //showAllSearch.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Find;
-    private javax.swing.JLabel Name;
-    private javax.swing.JTextField inputWord;
-    private javax.swing.JList<Word> searchList;
-    private javax.swing.JScrollPane showAllSearch;
     // End of variables declaration//GEN-END:variables
 }
