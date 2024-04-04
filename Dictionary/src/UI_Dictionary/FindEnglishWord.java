@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package dictionary;
+package UI_Dictionary;
 
 import java.awt.event.KeyEvent;
 
@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 public class FindEnglishWord extends javax.swing.JFrame {
 
     private Dictionary dictionary;
+    private MainFrame mainFrame;
     private WordFrame wordFrame;
 
     /**
@@ -21,6 +22,8 @@ public class FindEnglishWord extends javax.swing.JFrame {
     public FindEnglishWord() {
         initComponents();
         wordFrame = new WordFrame();
+        wordFrame.setCallerFrame(this);
+        dictionary = Dictionary.instance;
     }
 
     public void setDictionary(Dictionary dictionary) {
@@ -29,6 +32,14 @@ public class FindEnglishWord extends javax.swing.JFrame {
 
     public Dictionary getDictionary() {
         return dictionary;
+    }
+
+    public void setMainFrame(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
+    }
+
+    public MainFrame getMainFrame() {
+        return mainFrame;
     }
 
     /**
@@ -46,9 +57,13 @@ public class FindEnglishWord extends javax.swing.JFrame {
         Find = new javax.swing.JButton();
         inputWord = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
 
         showAllSearch.setOpaque(true);
 
@@ -141,8 +156,7 @@ public class FindEnglishWord extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             FindActionPerformed(null);
             return;
-        }else if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE)
-        {
+        } else if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
             searchList.setListData(new Word[1]);
         }
 
@@ -173,6 +187,11 @@ public class FindEnglishWord extends javax.swing.JFrame {
         }
         showWord(searchList.getSelectedValue());
     }//GEN-LAST:event_searchListKeyReleased
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        mainFrame.setVisible(true);
+        mainFrame.setLocation(this.getLocation());
+    }//GEN-LAST:event_formComponentHidden
 
     /**
      * @param args the command line arguments

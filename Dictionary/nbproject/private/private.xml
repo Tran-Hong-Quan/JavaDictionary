@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Quan/Disk/Code%20Projects/Java/JavaDictionary/Dictionary/src/dictionary/WordFrame.java</file>
-            <file>file:/C:/Users/Quan/Disk/Code%20Projects/Java/JavaDictionary/Dictionary/src/dictionary/MainFrame.java</file>
-            <file>file:/C:/Users/Quan/Disk/Code%20Projects/Java/JavaDictionary/Dictionary/src/dictionary/FindEnglishWord.java</file>
-            <file>file:/C:/Users/Quan/Disk/Code%20Projects/Java/JavaDictionary/Dictionary/src/dictionary/Dictionary.java</file>
-            <file>file:/C:/Users/Quan/Disk/Code%20Projects/Java/JavaDictionary/Dictionary/src/dictionary/Word.java</file>
+            <file>file:/C:/Users/Quan/Disk/CodeProjects/Java/JavaDictionary/Dictionary/src/UI_Dictionary/MainFrame.java</file>
+            <file>file:/C:/Users/Quan/Disk/CodeProjects/Java/JavaDictionary/Dictionary/src/SimpleDictionary/Word.java</file>
+            <file>file:/C:/Users/Quan/Disk/CodeProjects/Java/JavaDictionary/Dictionary/src/UI_Dictionary/Dictionary.java</file>
+            <file>file:/C:/Users/Quan/Disk/CodeProjects/Java/JavaDictionary/Dictionary/src/UI_Dictionary/Word.java</file>
+            <file>file:/C:/Users/Quan/Disk/CodeProjects/Java/JavaDictionary/Dictionary/src/SimpleDictionary/DictionaryCommandLine.java</file>
+            <file>file:/C:/Users/Quan/Disk/CodeProjects/Java/JavaDictionary/Dictionary/src/UI_Dictionary/FindEnglishWord.java</file>
+            <file>file:/C:/Users/Quan/Disk/CodeProjects/Java/JavaDictionary/Dictionary/src/UI_Dictionary/WordFrame.java</file>
         </group>
     </open-files>
 </project-private>

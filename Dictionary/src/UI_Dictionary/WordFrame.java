@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package dictionary;
+package UI_Dictionary;
 
 /**
  *
@@ -11,20 +11,30 @@ package dictionary;
 public class WordFrame extends javax.swing.JFrame {
 
     private Word word;
-    
-    public void setWord(Word word){
+    private javax.swing.JFrame callerFrame;
+
+    public void setWord(Word word) {
         this.word = word;
     }
-    
-    public Word getWord(){
+
+    public Word getWord() {
         return word;
     }
-    
-    public void showWord(){
+
+    public void setCallerFrame(javax.swing.JFrame callerFrame) {
+        this.callerFrame = callerFrame;
+    }
+
+    public javax.swing.JFrame setCallerFrame() {
+        return callerFrame;
+    }
+
+    public void showWord() {
         wordLabel.setText(word.getWord());
         pronounce.setText(word.getPronounce());
-        explain.setText(word.getDescription()+word.getHtml());
-    }    
+        explain.setText(word.getDescription() + word.getHtml());
+    }
+
     /**
      * Creates new form WordFrame
      */
@@ -52,6 +62,11 @@ public class WordFrame extends javax.swing.JFrame {
         setName("Dictionary"); // NOI18N
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
 
         explain.setContentType("text/html"); // NOI18N
         explain.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -115,13 +130,22 @@ public class WordFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseReleased
-        this.setVisible(false);
+        hideFrame();
     }//GEN-LAST:event_backButtonMouseReleased
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+        hideFrame();
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        hideFrame();
+    }//GEN-LAST:event_formComponentHidden
+
+    private void hideFrame(){
+        callerFrame.setVisible(true);
+        callerFrame.setLocation(this.getLocation());
+    }
+    
     /**
      * @param args the command line arguments
      */

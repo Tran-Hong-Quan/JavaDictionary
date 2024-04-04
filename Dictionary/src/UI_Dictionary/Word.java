@@ -1,4 +1,4 @@
-package dictionary;
+package UI_Dictionary;
 
 public class Word {
     private int id;

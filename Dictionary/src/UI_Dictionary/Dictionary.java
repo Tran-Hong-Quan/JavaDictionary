@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package dictionary;
+package UI_Dictionary;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -20,6 +20,8 @@ import java.util.List;
  */
 public class Dictionary {
 
+    public static Dictionary instance;
+    
     private List<Word> engToViet = new ArrayList<Word>();
     private List<Word> vietToEng = new ArrayList<Word>();
 
@@ -112,8 +114,9 @@ public class Dictionary {
     public static void main(String[] args) {
         var dic = new Dictionary();
         dic.readDatabase();
-        var mainFrame = new FindEnglishWord();
-        mainFrame.setDictionary(dic);
-        mainFrame.Init();
+        Dictionary.instance = dic;
+        var mainFrame = new MainFrame();
+        mainFrame.setVisible(true);
+        
     }
 }
