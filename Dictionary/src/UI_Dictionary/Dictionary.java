@@ -21,7 +21,7 @@ import java.util.List;
 public class Dictionary {
 
     public static Dictionary instance;
-    
+
     private List<Word> engToViet = new ArrayList<Word>();
     private List<Word> vietToEng = new ArrayList<Word>();
 
@@ -102,13 +102,42 @@ public class Dictionary {
 
         return words.toArray(new Word[0]);
     }
-    
-    public Word findEngWord(String find){
-        for(Word w : engToViet){
-            if(w.getWord().equals(find))
+
+    public Word findEngWord(String find) {
+        for (Word w : engToViet) {
+            if (w.getWord().equals(find)) {
                 return w;
+            }
         }
         return null;
+    }
+
+    public Word findVietWord(String find) {
+        for (Word w : vietToEng) {
+            if (w.getWord().equals(find)) {
+                return w;
+            }
+        }
+        return null;
+    }
+
+    public Word[] findAllVietWordContain(String find) {
+        List<Word> words = new ArrayList<Word>();
+
+        for (Word w : vietToEng) {
+            if (w.getWord().startsWith(find)) {
+                words.add(w);
+            }
+        }
+
+        Collections.sort(words, new Comparator<Word>() {
+            @Override
+            public int compare(Word s1, Word s2) {
+                return s1.getWord().compareTo(s2.getWord());
+            }
+        });
+
+        return words.toArray(new Word[0]);
     }
 
     public static void main(String[] args) {
@@ -117,6 +146,6 @@ public class Dictionary {
         Dictionary.instance = dic;
         var mainFrame = new MainFrame();
         mainFrame.setVisible(true);
-        
+
     }
 }

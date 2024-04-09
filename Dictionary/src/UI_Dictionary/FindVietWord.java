@@ -8,18 +8,18 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author Quan
+ * @author Tran Hong Quan
  */
-public class FindEnglishWord extends javax.swing.JFrame {
+public class FindVietWord extends javax.swing.JFrame {
 
+    /**
+     * Creates new form FindVietWord
+     */
     private Dictionary dictionary;
     private MainFrame mainFrame;
     private WordFrame wordFrame;
 
-    /**
-     * Creates new form MainFrame
-     */
-    public FindEnglishWord() {
+    public FindVietWord() {
         initComponents();
         wordFrame = new WordFrame();
         wordFrame.setCallerFrame(this);
@@ -57,8 +57,11 @@ public class FindEnglishWord extends javax.swing.JFrame {
         Find = new javax.swing.JButton();
         inputWord = new javax.swing.JTextField();
 
-        setResizable(false);
-        setSize(new java.awt.Dimension(800, 600));
+        setLocation(new java.awt.Point(764, 572));
+        setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(764, 572));
+        setMinimumSize(new java.awt.Dimension(764, 572));
+        setSize(new java.awt.Dimension(764, 572));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
                 formComponentHidden(evt);
@@ -83,7 +86,7 @@ public class FindEnglishWord extends javax.swing.JFrame {
 
         Name.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name.setText("Find English Word");
+        Name.setText("Find Vietnamese Word");
 
         Find.setText("Find");
         Find.addActionListener(new java.awt.event.ActionListener() {
@@ -113,11 +116,11 @@ public class FindEnglishWord extends javax.swing.JFrame {
                         .addComponent(inputWord, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Find, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(Name)
-                .addGap(194, 194, 194))
+                .addGap(132, 132, 132))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,47 +131,13 @@ public class FindEnglishWord extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Find, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inputWord, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(showAllSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
-
-        Word w = dictionary.findEngWord(inputWord.getText());
-        if (w == null) {
-            return;
-        }
-        showWord(w);
-    }//GEN-LAST:event_FindActionPerformed
-
-    public void showWord(Word word) {
-        wordFrame.setWord(word);
-        wordFrame.showWord();
-        wordFrame.setVisible(true);
-        wordFrame.setLocationRelativeTo(this);
-        this.setVisible(false);
-    }
-
-    private void inputWordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputWordKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            FindActionPerformed(null);
-            return;
-        } else if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            searchList.setListData(new Word[1]);
-        }
-
-        var inputText = inputWord.getText();
-
-        if (inputText.equals("")) {
-            return;
-        }
-        var words = dictionary.findAllEngWordContain(inputText);
-        searchList.setListData(words);
-    }//GEN-LAST:event_inputWordKeyReleased
 
     private void searchListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchListMouseReleased
         if (evt.getClickCount() < 2) {
@@ -189,10 +158,44 @@ public class FindEnglishWord extends javax.swing.JFrame {
         showWord(searchList.getSelectedValue());
     }//GEN-LAST:event_searchListKeyReleased
 
+    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
+
+        Word w = dictionary.findVietWord(inputWord.getText());
+        if (w == null) {
+            return;
+        }
+        showWord(w);
+    }//GEN-LAST:event_FindActionPerformed
+
+    private void inputWordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputWordKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            FindActionPerformed(null);
+            return;
+        } else if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            searchList.setListData(new Word[1]);
+        }
+
+        var inputText = inputWord.getText();
+
+        if (inputText.equals("")) {
+            return;
+        }
+        var words = dictionary.findAllVietWordContain(inputText);
+        searchList.setListData(words);
+    }//GEN-LAST:event_inputWordKeyReleased
+
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         mainFrame.setVisible(true);
         mainFrame.setLocation(this.getLocation());
     }//GEN-LAST:event_formComponentHidden
+
+    public void showWord(Word word) {
+        wordFrame.setWord(word);
+        wordFrame.showWord();
+        wordFrame.setVisible(true);
+        wordFrame.setLocation(this.getLocation());
+        this.setVisible(false);
+    }
 
     /**
      * @param args the command line arguments
@@ -211,27 +214,22 @@ public class FindEnglishWord extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FindEnglishWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FindVietWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FindEnglishWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FindVietWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FindEnglishWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FindVietWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FindEnglishWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FindVietWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FindEnglishWord().setVisible(true);
+                new FindVietWord().setVisible(true);
             }
         });
-    }
-
-    public void Init() {
-        setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

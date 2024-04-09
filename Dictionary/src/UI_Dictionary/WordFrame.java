@@ -144,6 +144,7 @@ public class WordFrame extends javax.swing.JFrame {
     private void hideFrame(){
         callerFrame.setVisible(true);
         callerFrame.setLocation(this.getLocation());
+        setVisible(false);
     }
     
     /**

@@ -13,23 +13,34 @@ import java.awt.event.KeyEvent;
 public class MainFrame extends javax.swing.JFrame {
 
     private FindEnglishWord findEnglishWordFrame;
+    private FindVietWord findVietWordFrame;
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         findEnglishWordFrame = new FindEnglishWord();
         findEnglishWordFrame.setMainFrame(this);
+        findVietWordFrame = new FindVietWord();
+        findVietWordFrame.setMainFrame(this);
         initComponents();
     }
-    
-    public void setFindEnglishWordFrame(FindEnglishWord findEnglishWordFrame){
+
+    public void setFindEnglishWordFrame(FindEnglishWord findEnglishWordFrame) {
         this.findEnglishWordFrame = findEnglishWordFrame;
     }
-    
-    public FindEnglishWord getFindEnglishWordFrame(){
+
+    public FindEnglishWord getFindEnglishWordFrame() {
         return findEnglishWordFrame;
     }
 
+    public void setFindVietWordFrame(FindVietWord findVietWordFrame) {
+        this.findVietWordFrame = findVietWordFrame;
+    }
+
+    public FindVietWord getFindVietWordFrame() {
+        return findVietWordFrame;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +53,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         Name = new javax.swing.JLabel();
         openSearchEngWord = new javax.swing.JButton();
+        openSearchVietWord = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -51,6 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
         Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Name.setText("ENG-VIET DICTIONARY");
 
+        openSearchEngWord.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         openSearchEngWord.setText("Search English Word");
         openSearchEngWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,18 +71,33 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        openSearchVietWord.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        openSearchVietWord.setText("Tra tiếng Việt");
+        openSearchVietWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openSearchVietWordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(openSearchEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(30, Short.MAX_VALUE)
+                        .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(openSearchEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(openSearchVietWord, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,7 +106,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(openSearchEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(openSearchVietWord, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(330, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,6 +120,11 @@ public class MainFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_openSearchEngWordActionPerformed
 
+    private void openSearchVietWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openSearchVietWordActionPerformed
+        findVietWordFrame.setVisible(true);
+        findVietWordFrame.setLocation(this.getLocation());
+        this.setVisible(false);
+    }//GEN-LAST:event_openSearchVietWordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,5 +171,6 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Name;
     private javax.swing.JButton openSearchEngWord;
+    private javax.swing.JButton openSearchVietWord;
     // End of variables declaration//GEN-END:variables
 }
