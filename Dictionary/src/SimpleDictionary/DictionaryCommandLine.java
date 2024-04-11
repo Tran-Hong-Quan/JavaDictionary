@@ -6,15 +6,23 @@ public class DictionaryCommandLine {
     // Example usage
 
     DictionaryManagement dictionaryManagement = new DictionaryManagement();
-
+    public static int status = 0;
     public static void main(String[] args) {
         DictionaryCommandLine cmd = new DictionaryCommandLine();
         Scanner scanner = new Scanner(System.in);
         for (;;) {
-            DictionaryCommandLine.clearConsole();
-            int a = cmd.printMenu(scanner);
-
-            switch (a) {
+            switch (status) {
+                case 0:
+                    status = cmd.printMenu(scanner);
+                    if (status == 0) {
+                        System.out.println("Action not supported.");
+                        try {
+                            System.out.wait(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    break;
                 case 1:
                     cmd.addWord(scanner);
                     break;
@@ -25,10 +33,7 @@ public class DictionaryCommandLine {
                     cmd.updateWord(scanner);
                     break;
                 case 4:
-                    cmd.display(scanner);
-                    break;
-                case 5:
-                    cmd.lookUp(scanner);
+                    cmd.showAllWords(scanner);
                     break;
                 case 6:
                     cmd.search(scanner);
@@ -47,17 +52,12 @@ public class DictionaryCommandLine {
         }
     }
 
-    public void dictionaryBasic(Scanner scanner) {
-        dictionaryManagement.insertFromCommandline(scanner);
-        dictionaryManagement.showAllWords();
-    }
-
     public void dictionaryExportToFile() {
         dictionaryManagement.saveToFile();
     }
 
     public void dictionarySearcher(String search) {
-        dictionaryManagement.printWords(dictionaryManagement.findAllWordContain(search));
+//        dictionaryManagement.printWords(dictionaryManagement.findAllWordContain(search));
     }
 
     public void addWord(Scanner scanner) {
@@ -76,7 +76,55 @@ public class DictionaryCommandLine {
             System.out.println("There's no " + wordToRemove + " to remove");
         }
     }
-
+    public void showAllWords(Scanner scanner) {
+        int currentPage = 1;
+        int totalPage = this.dictionaryManagement.dictionary.data.size() / 20 + 1;
+        boolean stay = true;
+        while (stay) {
+            clearConsole();
+            dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList(currentPage*20, (currentPage+1)*20-1), currentPage);
+            System.out.println("[1] Next page\t[2] Previous page\t[3] Choose a word\t[4] Back to main menu");
+            int cmd = scanner.nextInt();
+            switch (cmd) {
+                case 1:
+                    if (currentPage < totalPage) {
+                        currentPage++;
+                    } else {
+                        System.out.println("This is the last page");
+                    }
+                    break;
+                case 2:
+                    if (currentPage > 1) {
+                        currentPage--;
+                        dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList((currentPage - 1) * 20, currentPage * 20), currentPage);
+                    } else {
+                        System.out.println("This is the first page");
+                        try {
+                            System.out.wait(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    break;
+                case 3:
+                    stay = false;
+                    showWord(this.dictionaryManagement.getWord(scanner.nextInt()));
+                    break;
+                case 4:
+                    stay = false;
+                    break;
+                default:
+                    System.out.println("Action not supported.");
+                    try {
+                        System.out.wait(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+            }
+        }
+        scanner.nextLine();
+    }
     public int printMenu(Scanner scanner) {
         System.out.println("Welcome to My Application!");
         System.out.println("[0] Exit");
@@ -99,22 +147,9 @@ public class DictionaryCommandLine {
         System.out.flush();
     }
 
-    public void display(Scanner scanner) {
-        dictionaryManagement.showAllWords();
-        scanner.nextLine();
-        System.out.print("Load data successfully, press any button to continue");
-        scanner.nextLine();
-    }
+    public void showWord(Word word){
 
-    public void lookUp(Scanner scanner) {
-        scanner.nextLine();
-        System.out.print("Import word to look up: ");
-        String word = scanner.nextLine();
-        dictionaryManagement.printWords(dictionaryManagement.findAllWordContain(word));
-        System.out.print("Load data successfully, press any button to continue");
-        scanner.nextLine();
     }
-
     public void updateWord(Scanner scanner) {
         scanner.nextLine();
         System.out.print("Import word to update: ");
@@ -131,13 +166,44 @@ public class DictionaryCommandLine {
         }
         scanner.nextLine();
     }
+    public void lookup(){
 
+    }
     public void search(Scanner scanner) {
         scanner.nextLine();
-        System.out.print("Import word to look up: ");
-        String word = scanner.nextLine();
-        dictionaryManagement.search(word);
-        System.out.print("Press any button to continue");
+        boolean continueSearch = true;
+        while (continueSearch){
+            clearConsole();
+            System.out.print("Searching for: ");
+            String word = scanner.nextLine();
+            Word founded = dictionaryManagement.search(word);
+            if (founded == null){
+                return;
+            }
+            boolean stay = true;
+            while (stay){
+                System.out.println("[1] Pronunciation\t[2] Search another word\t[3] Back to main menu");
+                int cmd = scanner.nextInt();
+                switch (cmd) {
+                    case 1:
+                        dictionaryManagement.playPronunciation(founded);
+                        break;
+                    case 2:
+                        stay = false;
+                        scanner.nextLine();
+                        break;
+                    case 3:
+                        stay = false;
+                        continueSearch = false;
+                        break;
+                    default:
+                        System.out.println("Invalid command, press any key to continue....");
+                        scanner.next();
+                        break;
+                }
+            }
+        }
+
         scanner.nextLine();
     }
 

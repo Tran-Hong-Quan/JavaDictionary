@@ -1,5 +1,10 @@
 package SimpleDictionary;
 
+import java.util.Locale;
+import javax.speech.Central;
+import javax.speech.synthesis.Synthesizer;
+import javax.speech.synthesis.SynthesizerModeDesc;
+
 public class Word {
 
     private String word_target;
@@ -29,4 +34,12 @@ public class Word {
         this.word_explain = explain;
     }
 
+    public void playPronunciation(Synthesizer synthesizer){
+            synthesizer.speakPlainText(word_target, null);
+        try {
+            synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

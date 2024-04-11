@@ -8,10 +8,33 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import java.util.Locale;
+import javax.speech.Central;
+import javax.speech.EngineException;
+import javax.speech.synthesis.Synthesizer;
+import javax.speech.synthesis.SynthesizerModeDesc;
+
 public class DictionaryManagement {
 
     public Dictionary dictionary = new Dictionary();
-
+    private Synthesizer synthesizer;
+    public DictionaryManagement(){
+        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        try {
+            Central.registerEngineCentral("com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
+        } catch (EngineException e) {
+            e.printStackTrace();
+            return;
+        }
+        try {
+            synthesizer = Central.createSynthesizer(new SynthesizerModeDesc(Locale.US));
+            synthesizer.allocate();
+            synthesizer.resume();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.insertFromFile();
+    }
     public void insertFromCommandline(Scanner scanner) {
         // Prompt for the number of words to insert
         System.out.print("Enter the number of words to insert: ");
@@ -33,34 +56,29 @@ public class DictionaryManagement {
         System.out.println("Words inserted successfully!");
     }
 
-    public void showAllWords() {
-        for (Word w : dictionary.data) {
-            printWord(w);
-        }
-    }
-
     public void insertFromFile() {
-        String filePath = "data.txt";
+        String filePath = "Dictionary/data.txt";
         try {
             String content = new String(Files.readAllBytes(Paths.get(filePath)));
             dictionary.data = new Gson().fromJson(content, new TypeToken<ArrayList<Word>>() {
             }.getType());
-            System.out.println("Successfully read from file.");
+            System.out.println("Import data successfully!");
             sortData();
         } catch (IOException e) {
+            System.out.println("An error occurred while importing the data!");
             e.printStackTrace();
         }
     }
 
     public void saveToFile() {
         try {
-            FileWriter myWriter = new FileWriter("data.txt");
+            FileWriter myWriter = new FileWriter("Dictionary/data.txt");
             myWriter.write(new Gson().toJson(dictionary.data, new TypeToken<ArrayList<Word>>() {
             }.getType()));
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            System.out.println("Export data successfully!");
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred, please try again!");
             e.printStackTrace();
         }
     }
@@ -98,14 +116,15 @@ public class DictionaryManagement {
         return words;
     }
 
-    public void search(String word) {
+    public Word search(String word) {
         for (Word w : dictionary.data) {
             if (w.getWordTarget().equals(word)) {
                 printWord(w);
-                return;
+                return w;
             }
         }
-        System.out.println("Cannot find " + word + "in database");
+        System.out.println("Cannot find " + word + " in the dictionary");
+        return null;
     }
 
     public int searchIndex(String word) {
@@ -133,15 +152,19 @@ public class DictionaryManagement {
     }
 
     public void printWord(Word w) {
-        System.out.println(w.getWordTarget() + ": " + w.getWordExplain());
+        System.out.printf("%-30s | %-30s\n", w.getWordTarget(), w.getWordExplain());
     }
 
-    public void printWords(List<Word> words) {
+    public void printWords(List<Word> words, int pageNumber) {
+        System.out.printf("No\t| %-30s | Vietnamese\n", "English");
         for (Word w : words) {
+            System.out.print((words.indexOf(w) + 1 + pageNumber*20) + "\t| ");
             printWord(w);
         }
     }
-
+    public void playPronunciation(Word word) {
+        word.playPronunciation(this.synthesizer);
+    }
     public void sortData() {
         Collections.sort(dictionary.data, new Comparator<Word>() {
             @Override
