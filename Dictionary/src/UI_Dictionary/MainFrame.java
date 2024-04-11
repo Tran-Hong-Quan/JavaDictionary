@@ -14,6 +14,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private FindEnglishWord findEnglishWordFrame;
     private FindVietWord findVietWordFrame;
+    private OnlineSearch onlineSearchFrame;
 
     /**
      * Creates new form MainFrame
@@ -23,6 +24,8 @@ public class MainFrame extends javax.swing.JFrame {
         findEnglishWordFrame.setMainFrame(this);
         findVietWordFrame = new FindVietWord();
         findVietWordFrame.setMainFrame(this);
+        onlineSearchFrame = new OnlineSearch();
+        onlineSearchFrame.setMainFrame(this);
         initComponents();
     }
 
@@ -54,6 +57,8 @@ public class MainFrame extends javax.swing.JFrame {
         Name = new javax.swing.JLabel();
         openSearchEngWord = new javax.swing.JButton();
         openSearchVietWord = new javax.swing.JButton();
+        openInfor = new javax.swing.JButton();
+        openOnlineSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -61,10 +66,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         Name.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name.setText("ENG-VIET DICTIONARY");
+        Name.setText("TỪ ĐIỂN TIẾNG ANH");
 
         openSearchEngWord.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        openSearchEngWord.setText("Search English Word");
+        openSearchEngWord.setText("Tra tiếng Anh");
         openSearchEngWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openSearchEngWordActionPerformed(evt);
@@ -76,6 +81,22 @@ public class MainFrame extends javax.swing.JFrame {
         openSearchVietWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openSearchVietWordActionPerformed(evt);
+            }
+        });
+
+        openInfor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        openInfor.setText("Thông tin");
+        openInfor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openInforActionPerformed(evt);
+            }
+        });
+
+        openOnlineSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        openOnlineSearch.setText("Dịch Online");
+        openOnlineSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openOnlineSearchActionPerformed(evt);
             }
         });
 
@@ -91,12 +112,11 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(openSearchEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(openSearchVietWord, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(openSearchEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(openSearchVietWord, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(openInfor, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(openOnlineSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -106,9 +126,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(openSearchEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(47, 47, 47)
                 .addComponent(openSearchVietWord, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(openOnlineSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(openInfor, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -125,6 +149,16 @@ public class MainFrame extends javax.swing.JFrame {
         findVietWordFrame.setLocation(this.getLocation());
         this.setVisible(false);
     }//GEN-LAST:event_openSearchVietWordActionPerformed
+
+    private void openInforActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openInforActionPerformed
+        onlineSearchFrame.setVisible(true);
+        onlineSearchFrame.setLocation(this.getLocation());
+        this.setVisible(false);
+    }//GEN-LAST:event_openInforActionPerformed
+
+    private void openOnlineSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openOnlineSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_openOnlineSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +204,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Name;
+    private javax.swing.JButton openInfor;
+    private javax.swing.JButton openOnlineSearch;
     private javax.swing.JButton openSearchEngWord;
     private javax.swing.JButton openSearchVietWord;
     // End of variables declaration//GEN-END:variables

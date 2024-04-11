@@ -56,6 +56,7 @@ public class FindEnglishWord extends javax.swing.JFrame {
         Name = new javax.swing.JLabel();
         Find = new javax.swing.JButton();
         inputWord = new javax.swing.JTextField();
+        backButton = new javax.swing.JButton();
 
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
@@ -83,7 +84,7 @@ public class FindEnglishWord extends javax.swing.JFrame {
 
         Name.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name.setText("Find English Word");
+        Name.setText("Từ Điển Anh Việt");
 
         Find.setText("Find");
         Find.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +97,13 @@ public class FindEnglishWord extends javax.swing.JFrame {
         inputWord.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 inputWordKeyReleased(evt);
+            }
+        });
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -112,18 +120,21 @@ public class FindEnglishWord extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addComponent(inputWord, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Find, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Find, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(backButton)
+                        .addGap(77, 77, 77)
+                        .addComponent(Name)))
                 .addContainerGap(62, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Name)
-                .addGap(194, 194, 194))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Find, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -194,6 +205,12 @@ public class FindEnglishWord extends javax.swing.JFrame {
         mainFrame.setLocation(this.getLocation());
     }//GEN-LAST:event_formComponentHidden
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        mainFrame.setVisible(true);
+        mainFrame.setLocation(this.getLocation());
+        setVisible(false);
+    }//GEN-LAST:event_backButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,6 +254,7 @@ public class FindEnglishWord extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Find;
     private javax.swing.JLabel Name;
+    private javax.swing.JButton backButton;
     private javax.swing.JTextField inputWord;
     private javax.swing.JList<Word> searchList;
     private javax.swing.JScrollPane showAllSearch;

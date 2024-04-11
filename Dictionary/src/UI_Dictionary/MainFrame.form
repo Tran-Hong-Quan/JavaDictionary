@@ -36,15 +36,12 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="115" pref="115" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="openSearchEngWord" min="-2" pref="555" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="openSearchVietWord" min="-2" pref="555" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="openSearchEngWord" alignment="0" min="-2" pref="555" max="-2" attributes="0"/>
+                          <Component id="openSearchVietWord" min="-2" pref="555" max="-2" attributes="0"/>
+                          <Component id="openInfor" min="-2" pref="555" max="-2" attributes="0"/>
+                          <Component id="openOnlineSearch" alignment="0" min="-2" pref="555" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -58,9 +55,13 @@
               <Component id="Name" min="-2" pref="69" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="openSearchEngWord" min="-2" pref="76" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Component id="openSearchVietWord" min="-2" pref="76" max="-2" attributes="0"/>
-              <EmptySpace pref="330" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Component id="openOnlineSearch" min="-2" pref="76" max="-2" attributes="0"/>
+              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <Component id="openInfor" min="-2" pref="76" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,7 +73,7 @@
           <Font name="Times New Roman" size="48" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="ENG-VIET DICTIONARY"/>
+        <Property name="text" type="java.lang.String" value="T&#x1eea; &#x110;I&#x1ec2;N TI&#x1ebe;NG ANH"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="openSearchEngWord">
@@ -80,7 +81,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Search English Word"/>
+        <Property name="text" type="java.lang.String" value="Tra ti&#x1ebf;ng Anh"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openSearchEngWordActionPerformed"/>
@@ -95,6 +96,28 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openSearchVietWordActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="openInfor">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="24" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openInforActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="openOnlineSearch">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="24" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="D&#x1ecb;ch Online"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openOnlineSearchActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

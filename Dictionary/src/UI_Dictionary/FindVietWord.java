@@ -56,6 +56,7 @@ public class FindVietWord extends javax.swing.JFrame {
         Name = new javax.swing.JLabel();
         Find = new javax.swing.JButton();
         inputWord = new javax.swing.JTextField();
+        backButton = new javax.swing.JButton();
 
         setLocation(new java.awt.Point(764, 572));
         setLocationByPlatform(true);
@@ -102,6 +103,13 @@ public class FindVietWord extends javax.swing.JFrame {
             }
         });
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,15 +126,22 @@ public class FindVietWord extends javax.swing.JFrame {
                         .addComponent(Find, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addComponent(backButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Name)
                 .addGap(132, 132, 132))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Find, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -189,6 +204,12 @@ public class FindVietWord extends javax.swing.JFrame {
         mainFrame.setLocation(this.getLocation());
     }//GEN-LAST:event_formComponentHidden
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        mainFrame.setVisible(true);
+        mainFrame.setLocation(this.getLocation());
+        setVisible(false);
+    }//GEN-LAST:event_backButtonActionPerformed
+
     public void showWord(Word word) {
         wordFrame.setWord(word);
         wordFrame.showWord();
@@ -235,6 +256,7 @@ public class FindVietWord extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Find;
     private javax.swing.JLabel Name;
+    private javax.swing.JButton backButton;
     private javax.swing.JTextField inputWord;
     private javax.swing.JList<Word> searchList;
     private javax.swing.JScrollPane showAllSearch;
