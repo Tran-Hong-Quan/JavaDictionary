@@ -1,26 +1,32 @@
 package SimpleDictionary;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class DictionaryCommandLine {
     // Example usage
 
-    DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    public DictionaryManagement dictionaryManagement = new DictionaryManagement();
     public static int status = 0;
     public static void main(String[] args) {
         DictionaryCommandLine cmd = new DictionaryCommandLine();
         Scanner scanner = new Scanner(System.in);
-        for (;;) {
+        System.out.println("You are using a Simple English - Vietnamese Dictionary created by T.H.Quan, N.D.Hung and P.T.Phong");
+        System.out.println("This is our final assignment on the course \" INT2204 - Object Oriented Programming\" at VNU-UET");
+        System.out.println("Word information in this dictionary is used for testing purpose only. " +
+                "We are not responsible for the correctness of the translation.");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        boolean exit = false;
+        while (!exit) {
             switch (status) {
                 case 0:
                     status = cmd.printMenu(scanner);
                     if (status == 0) {
-                        System.out.println("Action not supported.");
-                        try {
-                            System.out.wait(1000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+                        exit = true;
                     }
                     break;
                 case 1:
@@ -47,11 +53,21 @@ public class DictionaryCommandLine {
                     cmd.saveData(scanner);
                     break;
                 default:
-                    return;
+                    System.out.println("Action not supported.");
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
             }
         }
+        cmd.exit();
     }
 
+    public void exit() {
+        this.dictionaryManagement.endProgram();
+    }
     public void dictionaryExportToFile() {
         dictionaryManagement.saveToFile();
     }
@@ -82,51 +98,77 @@ public class DictionaryCommandLine {
         boolean stay = true;
         while (stay) {
             clearConsole();
-            dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList(currentPage*20, (currentPage+1)*20-1), currentPage);
+            if (currentPage == totalPage) {
+                dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList((currentPage-1)*20, this.dictionaryManagement.dictionary.data.size()), currentPage);
+            } else {
+                dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList((currentPage-1)*20, (currentPage)*20), currentPage);
+            }
+//            dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList((currentPage-1)*20, (currentPage)*20), currentPage);
+            System.out.println("Page " + currentPage + "/" + totalPage);
             System.out.println("[1] Next page\t[2] Previous page\t[3] Choose a word\t[4] Back to main menu");
-            int cmd = scanner.nextInt();
+            int cmd;
+            try {
+                cmd = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid command, try again.");
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                continue;
+            }
             switch (cmd) {
                 case 1:
                     if (currentPage < totalPage) {
                         currentPage++;
                     } else {
-                        System.out.println("This is the last page");
+                        System.out.println("This is the last page.");
                     }
                     break;
                 case 2:
                     if (currentPage > 1) {
                         currentPage--;
-                        dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList((currentPage - 1) * 20, currentPage * 20), currentPage);
                     } else {
-                        System.out.println("This is the first page");
-                        try {
-                            System.out.wait(1000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+                        System.out.println("This is the first page.");
                     }
                     break;
                 case 3:
                     stay = false;
-                    showWord(this.dictionaryManagement.getWord(scanner.nextInt()));
+                    System.out.print("Choose a word index to look up: ");
+                    int index;
+                    try {
+                        index = scanner.nextInt();
+                    } catch (Exception e) {
+                        System.out.println(scanner.next() + "is not a valid index, try again.");
+                        stay = true;
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        break;
+                    }
+                    showWord(this.dictionaryManagement.getWord(index-1));
                     break;
                 case 4:
                     stay = false;
+                    status = 0;
                     break;
                 default:
                     System.out.println("Action not supported.");
                     try {
-                        System.out.wait(1000);
+                        TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    break;
             }
         }
         scanner.nextLine();
     }
     public int printMenu(Scanner scanner) {
-        System.out.println("Welcome to My Application!");
+        clearConsole();
+        System.out.println("EV Dictionary, please choose an action:");
         System.out.println("[0] Exit");
         System.out.println("[1] Add");
         System.out.println("[2] Remove");
@@ -148,7 +190,36 @@ public class DictionaryCommandLine {
     }
 
     public void showWord(Word word){
-
+        Scanner scanner = new Scanner(System.in);
+        boolean stay = true;
+        while (stay){
+            clearConsole();
+            dictionaryManagement.printWord(word);
+            System.out.println("[1] Pronunciation\t[2] Looking for another word\t[3] Back to main menu");
+            int cmd = scanner.nextInt();
+            switch (cmd) {
+                case 1:
+                    dictionaryManagement.playPronunciation(word);
+                    break;
+                case 2:
+                    stay = false;
+                    scanner.nextLine();
+                    status = 6;
+                    break;
+                case 3:
+                    stay = false;
+                    status = 0;
+                    break;
+                default:
+                    System.out.println("Action not supported.");
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+            }
+        }
     }
     public void updateWord(Scanner scanner) {
         scanner.nextLine();
@@ -166,45 +237,32 @@ public class DictionaryCommandLine {
         }
         scanner.nextLine();
     }
-    public void lookup(){
-
-    }
-    public void search(Scanner scanner) {
+    public void lookup(Scanner scanner) {
         scanner.nextLine();
-        boolean continueSearch = true;
-        while (continueSearch){
-            clearConsole();
-            System.out.print("Searching for: ");
-            String word = scanner.nextLine();
-            Word founded = dictionaryManagement.search(word);
-            if (founded == null){
-                return;
-            }
+        clearConsole();
+        System.out.print("Enter the word to look up: ");
+        String word = scanner.nextLine();
+        Word founded = dictionaryManagement.search(word);
+        if (founded == null){
+            System.out.print("Cannot find the word \" " + word + "\". Continue searching? [Y/N]");
             boolean stay = true;
-            while (stay){
-                System.out.println("[1] Pronunciation\t[2] Search another word\t[3] Back to main menu");
-                int cmd = scanner.nextInt();
-                switch (cmd) {
-                    case 1:
-                        dictionaryManagement.playPronunciation(founded);
-                        break;
-                    case 2:
-                        stay = false;
-                        scanner.nextLine();
-                        break;
-                    case 3:
-                        stay = false;
-                        continueSearch = false;
-                        break;
-                    default:
-                        System.out.println("Invalid command, press any key to continue....");
-                        scanner.next();
-                        break;
+            while (stay) {
+                String cmd = scanner.nextLine();
+                if (cmd.equals("Y") || cmd.equals("y")) {
+                    status = 6;
+                    stay = false;
+                } else if (cmd.equals("N") || cmd.equals("n")) {
+                    status = 0;
+                    stay = false;
                 }
             }
+            return;
         }
-
+        showWord(founded);
         scanner.nextLine();
+    }
+    public void search(Scanner scanner) {
+
     }
 
     public void loadData(Scanner scanner) {
@@ -222,3 +280,10 @@ public class DictionaryCommandLine {
     }
 
 }
+
+/**
+ * TODO
+ * - Implement search function
+ * - Handle exception when user input invalid index
+ * - Update the UI/UX
+ */

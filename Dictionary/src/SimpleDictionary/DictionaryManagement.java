@@ -96,7 +96,13 @@ public class DictionaryManagement {
         }
         return false;
     }
-
+    public void endProgram() {
+        try {
+            synthesizer.deallocate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public List<Word> findAllWordContain(String find) {
         List<Word> words = new ArrayList<Word>();
 
@@ -158,7 +164,7 @@ public class DictionaryManagement {
     public void printWords(List<Word> words, int pageNumber) {
         System.out.printf("No\t| %-30s | Vietnamese\n", "English");
         for (Word w : words) {
-            System.out.print((words.indexOf(w) + 1 + pageNumber*20) + "\t| ");
+            System.out.print((words.indexOf(w) + 1 + (pageNumber-1)*20) + "\t| ");
             printWord(w);
         }
     }
