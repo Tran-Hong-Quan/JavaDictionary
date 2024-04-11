@@ -151,13 +151,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_openSearchVietWordActionPerformed
 
     private void openInforActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openInforActionPerformed
-        onlineSearchFrame.setVisible(true);
-        onlineSearchFrame.setLocation(this.getLocation());
-        this.setVisible(false);
+
     }//GEN-LAST:event_openInforActionPerformed
 
     private void openOnlineSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openOnlineSearchActionPerformed
-        // TODO add your handling code here:
+        onlineSearchFrame.setVisible(true);
+        onlineSearchFrame.setLocation(this.getLocation());
+        this.setVisible(false);
     }//GEN-LAST:event_openOnlineSearchActionPerformed
 
     /**

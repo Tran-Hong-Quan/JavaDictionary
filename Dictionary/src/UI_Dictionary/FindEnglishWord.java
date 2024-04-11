@@ -124,7 +124,7 @@ public class FindEnglishWord extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(backButton)
-                        .addGap(77, 77, 77)
+                        .addGap(96, 96, 96)
                         .addComponent(Name)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
@@ -201,6 +201,9 @@ public class FindEnglishWord extends javax.swing.JFrame {
     }//GEN-LAST:event_searchListKeyReleased
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        if (wordFrame.isShowing()) {
+            return;
+        }
         mainFrame.setVisible(true);
         mainFrame.setLocation(this.getLocation());
     }//GEN-LAST:event_formComponentHidden

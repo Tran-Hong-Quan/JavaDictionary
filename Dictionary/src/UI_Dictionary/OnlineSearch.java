@@ -152,7 +152,8 @@ public class OnlineSearch extends javax.swing.JFrame {
     private void EngVietButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EngVietButtonActionPerformed
         String inputText = inputTextArea.getText();
         try {
-            String result = translate("eng", "viet", inputText);
+
+            String result = translate("vi", "en", inputText);
             outputTextArea.setText(result);
         } catch (IOException e) {
             outputTextArea.setText("Cannot translate");
@@ -163,7 +164,7 @@ public class OnlineSearch extends javax.swing.JFrame {
     private void VietEngButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VietEngButtonActionPerformed
         String inputText = inputTextArea.getText();
         try {
-            String result = translate("viet", "eng", inputText);
+            String result = translate("en", "vi", inputText);
             outputTextArea.setText(result);
         } catch (IOException e) {
             outputTextArea.setText("Cannot translate");
@@ -182,7 +183,7 @@ public class OnlineSearch extends javax.swing.JFrame {
             response.append(inputLine);
         }
         inputStream.close();
-        return StringEscapeUtils.unescapeHtml4(response.toString());
+        return response.toString();
     }
 
     /**

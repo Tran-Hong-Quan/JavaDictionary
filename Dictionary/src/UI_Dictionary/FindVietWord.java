@@ -200,6 +200,9 @@ public class FindVietWord extends javax.swing.JFrame {
     }//GEN-LAST:event_inputWordKeyReleased
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        if (wordFrame.isShowing()) {
+            return;
+        }
         mainFrame.setVisible(true);
         mainFrame.setLocation(this.getLocation());
     }//GEN-LAST:event_formComponentHidden
