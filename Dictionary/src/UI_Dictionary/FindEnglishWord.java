@@ -58,6 +58,7 @@ public class FindEnglishWord extends javax.swing.JFrame {
         inputWord = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -201,11 +202,7 @@ public class FindEnglishWord extends javax.swing.JFrame {
     }//GEN-LAST:event_searchListKeyReleased
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        if (wordFrame.isShowing()) {
-            return;
-        }
-        mainFrame.setVisible(true);
-        mainFrame.setLocation(this.getLocation());
+
     }//GEN-LAST:event_formComponentHidden
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

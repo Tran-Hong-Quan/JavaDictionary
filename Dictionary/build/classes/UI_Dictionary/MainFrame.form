@@ -29,39 +29,39 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
-                      <Component id="Name" min="-2" pref="753" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="115" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="openSearchEngWord" alignment="0" min="-2" pref="555" max="-2" attributes="0"/>
-                          <Component id="openSearchVietWord" min="-2" pref="555" max="-2" attributes="0"/>
-                          <Component id="openInfor" min="-2" pref="555" max="-2" attributes="0"/>
-                          <Component id="openOnlineSearch" alignment="0" min="-2" pref="555" max="-2" attributes="0"/>
+                          <Component id="openSearchEngWord" alignment="0" pref="555" max="32767" attributes="0"/>
+                          <Component id="openSearchVietWord" pref="555" max="32767" attributes="0"/>
+                          <Component id="openGame" pref="555" max="32767" attributes="0"/>
+                          <Component id="openOnlineSearch" alignment="0" pref="555" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="Name" pref="753" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="Name" min="-2" pref="69" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="openSearchEngWord" min="-2" pref="76" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Component id="openSearchVietWord" min="-2" pref="76" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
               <Component id="openOnlineSearch" min="-2" pref="76" max="-2" attributes="0"/>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
-              <Component id="openInfor" min="-2" pref="76" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="openGame" min="-2" pref="76" max="-2" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,15 +98,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openSearchVietWordActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="openInfor">
+    <Component class="javax.swing.JButton" name="openGame">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin"/>
+        <Property name="text" type="java.lang.String" value="Tr&#xf2; ch&#x1a1;i"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openInforActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openGameActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="openOnlineSearch">

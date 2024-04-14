@@ -57,6 +57,7 @@ public class WordFrame extends javax.swing.JFrame {
         pronounce = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Word");
         setAlwaysOnTop(true);
         setName("Dictionary"); // NOI18N

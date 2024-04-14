@@ -58,6 +58,7 @@ public class FindVietWord extends javax.swing.JFrame {
         inputWord = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(764, 572));
         setLocationByPlatform(true);
         setMaximumSize(new java.awt.Dimension(764, 572));
@@ -200,11 +201,7 @@ public class FindVietWord extends javax.swing.JFrame {
     }//GEN-LAST:event_inputWordKeyReleased
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        if (wordFrame.isShowing()) {
-            return;
-        }
-        mainFrame.setVisible(true);
-        mainFrame.setLocation(this.getLocation());
+
     }//GEN-LAST:event_formComponentHidden
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
