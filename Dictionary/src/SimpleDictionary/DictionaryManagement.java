@@ -83,7 +83,7 @@ public class DictionaryManagement {
         List<Word> words = new ArrayList<Word>();
 
         for (Word w : dictionary.data) {
-            if (w.getWordTarget().equals(find)) {
+            if (w.getWordTarget().startsWith(find)) {
                 words.add(w);
             }
         }

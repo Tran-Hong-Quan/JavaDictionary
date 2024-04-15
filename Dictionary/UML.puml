@@ -1,0 +1,22 @@
+@startuml
+annotation java.lang.Override
+class SimpleDictionary.Dictionary
+class SimpleDictionary.DictionaryCommandLine
+class SimpleDictionary.DictionaryManagement
+class SimpleDictionary.Word
+class com.google.gson.Gson
+class com.google.gson.reflect.TypeToken
+class java.nio.file.Files
+class java.nio.file.Paths
+class java.util.ArrayList
+class java.util.List
+class java.util.Scanner
+SimpleDictionary.Dictionary ..> java.util.ArrayList
+SimpleDictionary.Dictionary ..> java.util.List
+SimpleDictionary.DictionaryCommandLine ..> java.util.Scanner
+SimpleDictionary.DictionaryManagement ..> java.lang.Override
+SimpleDictionary.DictionaryManagement ..> com.google.gson.Gson
+SimpleDictionary.DictionaryManagement ..> com.google.gson.reflect.TypeToken
+SimpleDictionary.DictionaryManagement ..> java.nio.file.Files
+SimpleDictionary.DictionaryManagement ..> java.nio.file.Paths
+@enduml
