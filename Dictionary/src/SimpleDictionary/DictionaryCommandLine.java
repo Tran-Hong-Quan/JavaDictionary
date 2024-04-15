@@ -1,5 +1,6 @@
 package SimpleDictionary;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -41,6 +42,9 @@ public class DictionaryCommandLine {
                 case 4:
                     cmd.showAllWords(scanner);
                     break;
+                case 5:
+                    cmd.lookup(scanner);
+                    break;
                 case 6:
                     cmd.search(scanner);
                     break;
@@ -72,10 +76,6 @@ public class DictionaryCommandLine {
         dictionaryManagement.saveToFile();
     }
 
-    public void dictionarySearcher(String search) {
-//        dictionaryManagement.printWords(dictionaryManagement.findAllWordContain(search));
-    }
-
     public void addWord(Scanner scanner) {
         dictionaryManagement.insertFromCommandline(scanner);
     }
@@ -93,15 +93,18 @@ public class DictionaryCommandLine {
         }
     }
     public void showAllWords(Scanner scanner) {
+        showWords(this.dictionaryManagement.dictionary.data, scanner);
+    }
+    public void showWords(List<Word> words, Scanner scanner) {
         int currentPage = 1;
-        int totalPage = this.dictionaryManagement.dictionary.data.size() / 20 + 1;
+        int totalPage = words.size() / 20 + 1;
         boolean stay = true;
         while (stay) {
             clearConsole();
             if (currentPage == totalPage) {
-                dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList((currentPage-1)*20, this.dictionaryManagement.dictionary.data.size()), currentPage);
+                dictionaryManagement.printWords(words.subList((currentPage-1)*20, words.size()), currentPage);
             } else {
-                dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList((currentPage-1)*20, (currentPage)*20), currentPage);
+                dictionaryManagement.printWords(words.subList((currentPage-1)*20, (currentPage)*20), currentPage);
             }
 //            dictionaryManagement.printWords(this.dictionaryManagement.dictionary.data.subList((currentPage-1)*20, (currentPage)*20), currentPage);
             System.out.println("Page " + currentPage + "/" + totalPage);
@@ -204,7 +207,7 @@ public class DictionaryCommandLine {
                 case 2:
                     stay = false;
                     scanner.nextLine();
-                    status = 6;
+                    status = 5;
                     break;
                 case 3:
                     stay = false;
@@ -242,7 +245,7 @@ public class DictionaryCommandLine {
         clearConsole();
         System.out.print("Enter the word to look up: ");
         String word = scanner.nextLine();
-        Word founded = dictionaryManagement.search(word);
+        Word founded = dictionaryManagement.lookup(word);
         if (founded == null){
             System.out.print("Cannot find the word \" " + word + "\". Continue searching? [Y/N]");
             boolean stay = true;
@@ -262,7 +265,25 @@ public class DictionaryCommandLine {
         scanner.nextLine();
     }
     public void search(Scanner scanner) {
-
+        scanner.nextLine();
+        System.out.print("Searching for: ");
+        String subString = scanner.nextLine();
+        List<Word> result = dictionaryManagement.search(subString);
+        if (result == null) {
+            System.out.print("Cannot find any result for \"" + subString + "\".\n");
+            System.out.print("Continue searching? [Y/N]");
+            while (true) {
+                if (scanner.nextLine().equals("Y")) {
+                    status = 6;
+                    break;
+                } else if (scanner.nextLine().equals("N")) {
+                    status = 0;
+                    break;
+                }
+            }
+            return;
+        }
+        showWords(result, scanner);
     }
 
     public void loadData(Scanner scanner) {

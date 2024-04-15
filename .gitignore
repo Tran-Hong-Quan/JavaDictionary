@@ -23,5 +23,6 @@ hs_err_pid*
 replay_pid*
 
 # IDE logs
-./out/
-./.idea/
+out/
+.idea/
+./Dictionary/build/

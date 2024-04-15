@@ -122,7 +122,7 @@ public class DictionaryManagement {
         return words;
     }
 
-    public Word search(String word) {
+    public Word lookup(String word) {
         for (Word w : dictionary.data) {
             if (w.getWordTarget().equals(word)) {
                 printWord(w);
@@ -133,6 +133,20 @@ public class DictionaryManagement {
         return null;
     }
 
+    public List<Word> search(String word) {
+        List<Word> words = new ArrayList<Word>();
+        int totalFounded = 0;
+        for (Word w : dictionary.data) {
+            if (w.getWordTarget().toLowerCase().contains(word)) {
+                words.add(w);
+                totalFounded++;
+            }
+        }
+        if (totalFounded == 0) {
+            return null;
+        }
+        return words;
+    }
     public int searchIndex(String word) {
         for (int i = 0; i < dictionary.data.size(); i++) {
             Word w = dictionary.data.get(i);
