@@ -68,6 +68,12 @@ public class DictionaryFrame extends javax.swing.JFrame {
         EngVietOnlineButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         outputOnlineSearchTextArea = new javax.swing.JTextArea();
+        wordTab = new javax.swing.JPanel();
+        scrollPaneExplain = new javax.swing.JScrollPane();
+        wordExplain = new javax.swing.JEditorPane();
+        wordLabel = new javax.swing.JLabel();
+        pronounce = new javax.swing.JLabel();
+        soundButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(763, 570));
@@ -94,7 +100,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         chooseSearchEnglish.setForeground(new java.awt.Color(255, 255, 255));
         chooseSearchEnglish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/engFind.png"))); // NOI18N
         chooseSearchEnglish.setText("Tra tiếng Anh");
-        chooseSearchEnglish.setActionCommand("Tra tiếng Anh");
         chooseSearchEnglish.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         chooseSearchEnglish.setBorderPainted(false);
         chooseSearchEnglish.setContentAreaFilled(false);
@@ -381,6 +386,67 @@ public class DictionaryFrame extends javax.swing.JFrame {
 
         tabs.addTab("tab1", onlineSearchTab);
 
+        wordTab.setBackground(new java.awt.Color(230, 230, 230));
+
+        wordExplain.setEditable(false);
+        wordExplain.setContentType("text/html"); // NOI18N
+        wordExplain.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        wordExplain.setText("Hãy tìm kiếm từ bạn muốn");
+        scrollPaneExplain.setViewportView(wordExplain);
+
+        wordLabel.setBackground(new java.awt.Color(255, 255, 255));
+        wordLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        wordLabel.setForeground(new java.awt.Color(0, 0, 0));
+        wordLabel.setText("Nothing");
+        wordLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        wordLabel.setOpaque(true);
+        wordLabel.setVerifyInputWhenFocusTarget(false);
+
+        pronounce.setBackground(new java.awt.Color(255, 255, 255));
+        pronounce.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        pronounce.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        pronounce.setText("Nothing");
+        pronounce.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pronounce.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        pronounce.setOpaque(true);
+        pronounce.setVerifyInputWhenFocusTarget(false);
+
+        soundButton.setBackground(new java.awt.Color(0, 153, 204));
+        soundButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Speaker_Icon.png"))); // NOI18N
+        soundButton.setFocusable(false);
+
+        javax.swing.GroupLayout wordTabLayout = new javax.swing.GroupLayout(wordTab);
+        wordTab.setLayout(wordTabLayout);
+        wordTabLayout.setHorizontalGroup(
+            wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(wordTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(wordTabLayout.createSequentialGroup()
+                        .addComponent(wordLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addComponent(pronounce)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(soundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scrollPaneExplain))
+                .addContainerGap())
+        );
+        wordTabLayout.setVerticalGroup(
+            wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(wordTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(wordLabel)
+                        .addComponent(pronounce))
+                    .addComponent(soundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(scrollPaneExplain, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+
+        tabs.addTab("tab1", wordTab);
+
         getContentPane().add(tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -30, 520, 590));
 
         pack();
@@ -514,7 +580,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_EngVietOnlineButtonActionPerformed
 
-     public String translate(String langFrom, String langTo, String text) throws IOException {
+    public String translate(String langFrom, String langTo, String text) throws IOException {
         String APIKEY = "AKfycbzxtNpZD2Ogs4oeUnj8nTaCmPlKwgwsLWPasyIsLQPB_WXvKdKU";
         URL url = new URL("https://script.google.com/macros/s/" + APIKEY + "/exec?q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) + "&target=" + langTo + "&source=" + langFrom);
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
@@ -528,7 +594,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         inputStream.close();
         return response.toString();
     }
-    
+
     private void chooseSearchVietnameseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseSearchVietnameseActionPerformed
         unSelectAllMenuButtons();
         chooseSearchVietnamese.setOpaque(true);
@@ -550,7 +616,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
     }
 
     private void showWord(Word word) {
-        System.out.println("Show " + word);
+        tabs.setSelectedIndex(3);
+        System.out.println("Show " + word.getPronounce());
+        wordLabel.setText(word.getWord());
+        pronounce.setText(word.getPronounce());
+        wordExplain.setText(word.getDescription() + word.getHtml());
     }
 
     /**
@@ -608,10 +678,16 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel nameApp1;
     private javax.swing.JPanel onlineSearchTab;
     private javax.swing.JTextArea outputOnlineSearchTextArea;
+    private javax.swing.JLabel pronounce;
+    private javax.swing.JScrollPane scrollPaneExplain;
     private javax.swing.JList<Word> searchEngList;
     private javax.swing.JList<Word> searchVietList;
     private javax.swing.JScrollPane showAllEngSearch;
     private javax.swing.JScrollPane showAllViewSearch;
+    private javax.swing.JButton soundButton;
     private javax.swing.JTabbedPane tabs;
+    private javax.swing.JEditorPane wordExplain;
+    private javax.swing.JLabel wordLabel;
+    private javax.swing.JPanel wordTab;
     // End of variables declaration//GEN-END:variables
 }
