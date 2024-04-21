@@ -4,6 +4,12 @@
  */
 package UI_Dictionary;
 
+import java.util.Locale;
+import javax.speech.Central;
+import javax.speech.EngineException;
+import javax.speech.synthesis.Synthesizer;
+import javax.speech.synthesis.SynthesizerModeDesc;
+
 /**
  *
  * @author Tran Hong Quan
@@ -12,7 +18,7 @@ public class WordFrame extends javax.swing.JFrame {
 
     private Word word;
     private javax.swing.JFrame callerFrame;
-
+    private Synthesizer synthesizer;
     public void setWord(Word word) {
         this.word = word;
     }
@@ -34,11 +40,32 @@ public class WordFrame extends javax.swing.JFrame {
         pronounce.setText(word.getPronounce());
         explain.setText(word.getDescription() + word.getHtml());
     }
-
+    public void playPronunciation(){
+        synthesizer.speakPlainText(word.getWord(), null);
+        try {
+            synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Creates new form WordFrame
      */
     public WordFrame() {
+        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        try {
+            Central.registerEngineCentral("com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
+        } catch (EngineException e) {
+            e.printStackTrace();
+            return;
+        }
+        try {
+            synthesizer = Central.createSynthesizer(new SynthesizerModeDesc(Locale.US));
+            synthesizer.allocate();
+            synthesizer.resume();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initComponents();
     }
 
@@ -50,9 +77,9 @@ public class WordFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         scrollPaneExplain = new javax.swing.JScrollPane();
         explain = new javax.swing.JEditorPane();
+        playPronounce = new javax.swing.JButton();
         wordLabel = new javax.swing.JLabel();
         pronounce = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
@@ -73,6 +100,13 @@ public class WordFrame extends javax.swing.JFrame {
         explain.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         explain.setText("Hãy tìm kiếm từ bạn muốn");
         scrollPaneExplain.setViewportView(explain);
+
+        playPronounce.setText("Phát âm");
+        playPronounce.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playPronounceActionPerformed(evt);
+            }
+        });
 
         wordLabel.setBackground(new java.awt.Color(40, 40, 40));
         wordLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -105,8 +139,11 @@ public class WordFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(scrollPaneExplain, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                        .addGap(0, 674, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scrollPaneExplain)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(playPronounce))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(wordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,12 +155,16 @@ public class WordFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wordLabel)
                     .addComponent(pronounce))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneExplain, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPaneExplain, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(playPronounce, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -141,6 +182,10 @@ public class WordFrame extends javax.swing.JFrame {
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         hideFrame();
     }//GEN-LAST:event_formComponentHidden
+
+    private void playPronounceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playPronounceActionPerformed
+        playPronunciation();
+    }//GEN-LAST:event_playPronounceActionPerformed
 
     private void hideFrame(){
         callerFrame.setVisible(true);
@@ -186,6 +231,7 @@ public class WordFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JEditorPane explain;
+    private javax.swing.JButton playPronounce;
     private javax.swing.JLabel pronounce;
     private javax.swing.JScrollPane scrollPaneExplain;
     private javax.swing.JLabel wordLabel;
