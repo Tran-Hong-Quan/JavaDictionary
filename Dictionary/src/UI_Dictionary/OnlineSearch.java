@@ -113,7 +113,7 @@ public class OnlineSearch extends javax.swing.JFrame {
                         .addComponent(backButton)
                         .addGap(151, 151, 151)
                         .addComponent(Name)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

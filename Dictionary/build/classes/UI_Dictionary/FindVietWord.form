@@ -90,9 +90,6 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JScrollPane" name="showAllSearch">
-      <Properties>
-        <Property name="opaque" type="boolean" value="true"/>
-      </Properties>
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
@@ -143,6 +140,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputWordActionPerformed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputWordKeyReleased"/>
       </Events>
     </Component>

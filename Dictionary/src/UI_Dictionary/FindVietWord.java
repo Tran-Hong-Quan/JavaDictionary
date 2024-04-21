@@ -70,8 +70,6 @@ public class FindVietWord extends javax.swing.JFrame {
             }
         });
 
-        showAllSearch.setOpaque(true);
-
         searchList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         searchList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         searchList.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,6 +96,11 @@ public class FindVietWord extends javax.swing.JFrame {
         });
 
         inputWord.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        inputWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputWordActionPerformed(evt);
+            }
+        });
         inputWord.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 inputWordKeyReleased(evt);
@@ -209,6 +212,10 @@ public class FindVietWord extends javax.swing.JFrame {
         mainFrame.setLocation(this.getLocation());
         setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void inputWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputWordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputWordActionPerformed
 
     public void showWord(Word word) {
         wordFrame.setWord(word);

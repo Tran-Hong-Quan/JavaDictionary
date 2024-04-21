@@ -144,8 +144,7 @@ public class Dictionary {
         var dic = new Dictionary();
         dic.readDatabase();
         Dictionary.instance = dic;
-        var mainFrame = new MainFrame();
-        mainFrame.setVisible(true);
-
+        DictionaryFrame dicFrame = new DictionaryFrame();
+        dicFrame.setVisible(true);
     }
 }
