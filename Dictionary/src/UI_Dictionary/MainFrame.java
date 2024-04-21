@@ -13,23 +13,40 @@ import java.awt.event.KeyEvent;
 public class MainFrame extends javax.swing.JFrame {
 
     private FindEnglishWord findEnglishWordFrame;
+    private FindVietWord findVietWordFrame;
+    private OnlineSearch onlineSearchFrame;
+    private Game game;
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         findEnglishWordFrame = new FindEnglishWord();
         findEnglishWordFrame.setMainFrame(this);
+        findVietWordFrame = new FindVietWord();
+        findVietWordFrame.setMainFrame(this);
+        onlineSearchFrame = new OnlineSearch();
+        onlineSearchFrame.setMainFrame(this);
+        game = new Game();
+        game.setMainFrame(this);
         initComponents();
     }
-    
-    public void setFindEnglishWordFrame(FindEnglishWord findEnglishWordFrame){
+
+    public void setFindEnglishWordFrame(FindEnglishWord findEnglishWordFrame) {
         this.findEnglishWordFrame = findEnglishWordFrame;
     }
-    
-    public FindEnglishWord getFindEnglishWordFrame(){
+
+    public FindEnglishWord getFindEnglishWordFrame() {
         return findEnglishWordFrame;
     }
 
+    public void setFindVietWordFrame(FindVietWord findVietWordFrame) {
+        this.findVietWordFrame = findVietWordFrame;
+    }
+
+    public FindVietWord getFindVietWordFrame() {
+        return findVietWordFrame;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +59,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         Name = new javax.swing.JLabel();
         openSearchEngWord = new javax.swing.JButton();
+        openSearchVietWord = new javax.swing.JButton();
+        openGame = new javax.swing.JButton();
+        openOnlineSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -49,12 +69,37 @@ public class MainFrame extends javax.swing.JFrame {
 
         Name.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name.setText("ENG-VIET DICTIONARY");
+        Name.setText("TỪ ĐIỂN TIẾNG ANH");
 
-        openSearchEngWord.setText("Search English Word");
+        openSearchEngWord.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        openSearchEngWord.setText("Tra tiếng Anh");
         openSearchEngWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openSearchEngWordActionPerformed(evt);
+            }
+        });
+
+        openSearchVietWord.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        openSearchVietWord.setText("Tra tiếng Việt");
+        openSearchVietWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openSearchVietWordActionPerformed(evt);
+            }
+        });
+
+        openGame.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        openGame.setText("Trò chơi");
+        openGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openGameActionPerformed(evt);
+            }
+        });
+
+        openOnlineSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        openOnlineSearch.setText("Dịch Online");
+        openOnlineSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openOnlineSearchActionPerformed(evt);
             }
         });
 
@@ -62,23 +107,35 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(openSearchEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(openSearchEngWord, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                            .addComponent(openSearchVietWord, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                            .addComponent(openGame, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                            .addComponent(openOnlineSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+                        .addGap(101, 101, 101))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Name, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(openSearchEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(openSearchVietWord, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(openOnlineSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(openGame, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,6 +147,21 @@ public class MainFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_openSearchEngWordActionPerformed
 
+    private void openSearchVietWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openSearchVietWordActionPerformed
+        findVietWordFrame.setVisible(true);
+        findVietWordFrame.setLocation(this.getLocation());
+        this.setVisible(false);
+    }//GEN-LAST:event_openSearchVietWordActionPerformed
+
+    private void openGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openGameActionPerformed
+
+    }//GEN-LAST:event_openGameActionPerformed
+
+    private void openOnlineSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openOnlineSearchActionPerformed
+        onlineSearchFrame.setVisible(true);
+        onlineSearchFrame.setLocation(this.getLocation());
+        this.setVisible(false);
+    }//GEN-LAST:event_openOnlineSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,6 +207,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Name;
+    private javax.swing.JButton openGame;
+    private javax.swing.JButton openOnlineSearch;
     private javax.swing.JButton openSearchEngWord;
+    private javax.swing.JButton openSearchVietWord;
     // End of variables declaration//GEN-END:variables
 }
