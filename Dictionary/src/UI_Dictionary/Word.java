@@ -1,5 +1,7 @@
 package UI_Dictionary;
 
+import javax.speech.synthesis.Synthesizer;
+
 public class Word {
     private int id;
     private String word;
@@ -64,6 +66,14 @@ public class Word {
         this.description = description;
     }
 
+    public void playPronunciation(Synthesizer synthesizer){
+        synthesizer.speakPlainText(word, null);
+        try {
+            synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     // toString() method for debugging purposes
     @Override
     public String toString() {
