@@ -68,7 +68,7 @@ public class TranslateGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(80, 70, 180, 42);
+        jTextField2.setBounds(80, 70, 180, 38);
 
         jTextField3.setEditable(false);
         jTextField3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -90,7 +90,7 @@ public class TranslateGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField4);
-        jTextField4.setBounds(80, 120, 180, 42);
+        jTextField4.setBounds(80, 120, 180, 38);
 
         jTextField5.setEditable(false);
         jTextField5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
