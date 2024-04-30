@@ -18,7 +18,8 @@ public class DictionaryManagement {
 
     public Dictionary dictionary = new Dictionary();
     private Synthesizer synthesizer;
-    public DictionaryManagement(){
+
+    public DictionaryManagement() {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         try {
             Central.registerEngineCentral("com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
@@ -35,6 +36,7 @@ public class DictionaryManagement {
         }
         this.insertFromFile();
     }
+
     public void insertFromCommandline(Scanner scanner) {
         // Prompt for the number of words to insert
         System.out.print("Enter the number of words to insert: ");
@@ -57,7 +59,7 @@ public class DictionaryManagement {
     }
 
     public void insertFromFile() {
-        String filePath = "Dictionary/data.txt";
+        String filePath = "data.txt";
         try {
             String content = new String(Files.readAllBytes(Paths.get(filePath)));
             dictionary.data = new Gson().fromJson(content, new TypeToken<ArrayList<Word>>() {
@@ -72,7 +74,7 @@ public class DictionaryManagement {
 
     public void saveToFile() {
         try {
-            FileWriter myWriter = new FileWriter("Dictionary/data.txt");
+            FileWriter myWriter = new FileWriter("data.txt");
             myWriter.write(new Gson().toJson(dictionary.data, new TypeToken<ArrayList<Word>>() {
             }.getType()));
             myWriter.close();
@@ -96,6 +98,11 @@ public class DictionaryManagement {
         }
         return false;
     }
+
+    public boolean removeWord(Word wordTarget) {
+        return dictionary.data.remove(wordTarget);
+    }
+
     public void endProgram() {
         try {
             synthesizer.deallocate();
@@ -103,11 +110,13 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
     }
+
     public List<Word> findAllWordContain(String find) {
+        find = find.toLowerCase();
         List<Word> words = new ArrayList<Word>();
 
         for (Word w : dictionary.data) {
-            if (w.getWordTarget().startsWith(find)) {
+            if (w.getWordTarget().toLowerCase().startsWith(find)) {
                 words.add(w);
             }
         }
@@ -147,6 +156,7 @@ public class DictionaryManagement {
         }
         return words;
     }
+
     public int searchIndex(String word) {
         for (int i = 0; i < dictionary.data.size(); i++) {
             Word w = dictionary.data.get(i);
@@ -178,13 +188,15 @@ public class DictionaryManagement {
     public void printWords(List<Word> words, int pageNumber) {
         System.out.printf("No\t| %-30s | Vietnamese\n", "English");
         for (Word w : words) {
-            System.out.print((words.indexOf(w) + 1 + (pageNumber-1)*20) + "\t| ");
+            System.out.print((words.indexOf(w) + 1 + (pageNumber - 1) * 20) + "\t| ");
             printWord(w);
         }
     }
+
     public void playPronunciation(Word word) {
         word.playPronunciation(this.synthesizer);
     }
+
     public void sortData() {
         Collections.sort(dictionary.data, new Comparator<Word>() {
             @Override
