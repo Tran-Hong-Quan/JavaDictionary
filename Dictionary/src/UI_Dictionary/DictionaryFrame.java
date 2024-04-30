@@ -50,6 +50,8 @@ public class DictionaryFrame extends javax.swing.JFrame {
         chooseSearchEnglish = new javax.swing.JButton();
         chooseSearchVietnamese = new javax.swing.JButton();
         chooseSearchOnline = new javax.swing.JButton();
+        chooseYourWords = new javax.swing.JButton();
+        chooseGame = new javax.swing.JButton();
         tabs = new javax.swing.JTabbedPane();
         findEnglishWordTab = new javax.swing.JPanel();
         inputEngWord = new javax.swing.JTextField();
@@ -136,7 +138,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         chooseSearchOnline.setBackground(new java.awt.Color(0, 123, 170));
         chooseSearchOnline.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         chooseSearchOnline.setForeground(new java.awt.Color(255, 255, 255));
-        chooseSearchOnline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/online.png"))); // NOI18N
+        chooseSearchOnline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/104126.png"))); // NOI18N
         chooseSearchOnline.setText("Dịch Online");
         chooseSearchOnline.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         chooseSearchOnline.setBorderPainted(false);
@@ -151,6 +153,42 @@ public class DictionaryFrame extends javax.swing.JFrame {
             }
         });
 
+        chooseYourWords.setBackground(new java.awt.Color(0, 123, 170));
+        chooseYourWords.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chooseYourWords.setForeground(new java.awt.Color(255, 255, 255));
+        chooseYourWords.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/chest.png"))); // NOI18N
+        chooseYourWords.setText("Từ của bạn");
+        chooseYourWords.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        chooseYourWords.setBorderPainted(false);
+        chooseYourWords.setContentAreaFilled(false);
+        chooseYourWords.setFocusable(false);
+        chooseYourWords.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chooseYourWords.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        chooseYourWords.setIconTextGap(10);
+        chooseYourWords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseYourWordsActionPerformed(evt);
+            }
+        });
+
+        chooseGame.setBackground(new java.awt.Color(0, 123, 170));
+        chooseGame.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        chooseGame.setForeground(new java.awt.Color(255, 255, 255));
+        chooseGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/controller-game-icon.png"))); // NOI18N
+        chooseGame.setText("Trò chơi");
+        chooseGame.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        chooseGame.setBorderPainted(false);
+        chooseGame.setContentAreaFilled(false);
+        chooseGame.setFocusable(false);
+        chooseGame.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chooseGame.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        chooseGame.setIconTextGap(10);
+        chooseGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseGameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -162,7 +200,9 @@ public class DictionaryFrame extends javax.swing.JFrame {
                     .addComponent(chooseSearchEnglish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(chooseSearchOnline, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nameApp1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                    .addComponent(chooseSearchVietnamese, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(chooseSearchVietnamese, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chooseYourWords, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chooseGame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuLayout.setVerticalGroup(
@@ -178,7 +218,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
                 .addComponent(chooseSearchVietnamese, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(chooseSearchOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(chooseYourWords, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chooseGame, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         getContentPane().add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 230, 630));
@@ -602,6 +646,14 @@ public class DictionaryFrame extends javax.swing.JFrame {
         tabs.setSelectedIndex(1);
     }//GEN-LAST:event_chooseSearchVietnameseActionPerformed
 
+    private void chooseYourWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseYourWordsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chooseYourWordsActionPerformed
+
+    private void chooseGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chooseGameActionPerformed
+
     private void unSelectAllMenuButtons() {
         for (javax.swing.JButton b : menuButtons) {
             b.setOpaque(false);
@@ -663,9 +715,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JButton FindEng;
     private javax.swing.JButton FindViet;
     private javax.swing.JButton VietEngOnlineButton;
+    private javax.swing.JButton chooseGame;
     private javax.swing.JButton chooseSearchEnglish;
     private javax.swing.JButton chooseSearchOnline;
     private javax.swing.JButton chooseSearchVietnamese;
+    private javax.swing.JButton chooseYourWords;
     private javax.swing.JPanel findEnglishWordTab;
     private javax.swing.JPanel findVietnameseWordTab;
     private javax.swing.JTextField inputEngWord;
