@@ -7,8 +7,8 @@ package UI_Dictionary;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+    import java.io.IOException;
+    import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -477,6 +477,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
         soundButton.setBackground(new java.awt.Color(0, 153, 204));
         soundButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Speaker_Icon.png"))); // NOI18N
         soundButton.setFocusable(false);
+        soundButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                soundButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout wordTabLayout = new javax.swing.GroupLayout(wordTab);
         wordTab.setLayout(wordTabLayout);
@@ -975,6 +980,10 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private void addYourVietWordFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addYourVietWordFieldKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_addYourVietWordFieldKeyReleased
+
+    private void soundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soundButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_soundButtonActionPerformed
 
     private void unSelectAllMenuButtons() {
         for (javax.swing.JButton b : menuButtons) {

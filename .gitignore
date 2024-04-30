@@ -26,3 +26,6 @@ replay_pid*
 out/
 .idea/
 ./Dictionary/build/
+Dictionary/build
+Dictionary/nbproject/private
+Dictionary/nbproject
