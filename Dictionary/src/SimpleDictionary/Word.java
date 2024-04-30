@@ -29,4 +29,9 @@ public class Word {
         this.word_explain = explain;
     }
 
+    @Override
+    public String toString() {
+        return word_target;
+    }
+
 }
