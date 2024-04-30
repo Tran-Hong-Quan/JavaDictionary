@@ -42,4 +42,9 @@ public class Word {
             e.printStackTrace();
         }
     }
+    @Override
+    public String toString() {
+        return word_target;
+    }
+
 }

@@ -8,8 +8,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+    import java.io.IOException;
+    import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -31,6 +31,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
 
     private Dictionary dictionary;
     private List<javax.swing.JButton> menuButtons = new ArrayList<>();
+    private SimpleDictionary.DictionaryManagement simpleDictionary;
 
     private Synthesizer synthesizer;
     /**
@@ -42,6 +43,8 @@ public class DictionaryFrame extends javax.swing.JFrame {
         dictionary = Dictionary.instance;
         initMenuButton();
         chooseSearchEnglishActionPerformed(null);
+        simpleDictionary = new SimpleDictionary.DictionaryManagement();
+        simpleDictionary.insertFromFile();
     }
 
     /**
@@ -101,6 +104,21 @@ public class DictionaryFrame extends javax.swing.JFrame {
         wordLabel = new javax.swing.JLabel();
         pronounce = new javax.swing.JLabel();
         soundButton = new javax.swing.JButton();
+        YourWordTab = new javax.swing.JPanel();
+        inputYourEngWord = new javax.swing.JTextField();
+        showAllEngSearch1 = new javax.swing.JScrollPane();
+        searchYourEngList = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        showYourVietWordField = new javax.swing.JTextField();
+        showYourEngWordField = new javax.swing.JTextField();
+        saveChangeYourWordButton = new javax.swing.JButton();
+        deleteYourWordButton = new javax.swing.JButton();
+        saveToFileYourWordButton = new javax.swing.JButton();
+        readYourWordFromFile = new javax.swing.JButton();
+        saveChangeYourWordButton1 = new javax.swing.JButton();
+        addYourEngWordField = new javax.swing.JTextField();
+        addYourVietWordField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(763, 570));
@@ -163,7 +181,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         chooseSearchOnline.setBackground(new java.awt.Color(0, 123, 170));
         chooseSearchOnline.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         chooseSearchOnline.setForeground(new java.awt.Color(255, 255, 255));
-        chooseSearchOnline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/104126.png"))); // NOI18N
+        chooseSearchOnline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/ggdich.png"))); // NOI18N
         chooseSearchOnline.setText("Dịch Online");
         chooseSearchOnline.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         chooseSearchOnline.setBorderPainted(false);
@@ -245,9 +263,9 @@ public class DictionaryFrame extends javax.swing.JFrame {
                 .addComponent(chooseSearchOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(chooseYourWords, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(chooseGame, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
 
         getContentPane().add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 230, 630));
@@ -521,6 +539,222 @@ public class DictionaryFrame extends javax.swing.JFrame {
 
         tabs.addTab("tab1", wordTab);
 
+        YourWordTab.setBackground(new java.awt.Color(230, 230, 230));
+
+        inputYourEngWord.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        inputYourEngWord.setForeground(new java.awt.Color(0, 0, 0));
+        inputYourEngWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputYourEngWordActionPerformed(evt);
+            }
+        });
+        inputYourEngWord.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                inputYourEngWordKeyReleased(evt);
+            }
+        });
+
+        searchYourEngList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        searchYourEngList.setForeground(new java.awt.Color(0, 0, 0));
+        searchYourEngList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        searchYourEngList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                searchYourEngListMouseReleased(evt);
+            }
+        });
+        searchYourEngList.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchYourEngListKeyReleased(evt);
+            }
+        });
+        showAllEngSearch1.setViewportView(searchYourEngList);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setText("Tiếng Anh");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setText("Tiếng Việt");
+
+        showYourVietWordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        showYourVietWordField.setForeground(new java.awt.Color(0, 0, 0));
+        showYourVietWordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showYourVietWordFieldActionPerformed(evt);
+            }
+        });
+        showYourVietWordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                showYourVietWordFieldKeyReleased(evt);
+            }
+        });
+
+        showYourEngWordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        showYourEngWordField.setForeground(new java.awt.Color(0, 0, 0));
+        showYourEngWordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showYourEngWordFieldActionPerformed(evt);
+            }
+        });
+        showYourEngWordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                showYourEngWordFieldKeyReleased(evt);
+            }
+        });
+
+        saveChangeYourWordButton.setBackground(new java.awt.Color(0, 153, 204));
+        saveChangeYourWordButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        saveChangeYourWordButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveChangeYourWordButton.setText("LƯU CHỈNH SỬA");
+        saveChangeYourWordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangeYourWordButtonActionPerformed(evt);
+            }
+        });
+
+        deleteYourWordButton.setBackground(new java.awt.Color(0, 153, 204));
+        deleteYourWordButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        deleteYourWordButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteYourWordButton.setText("XÓA TỪ");
+        deleteYourWordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteYourWordButtonActionPerformed(evt);
+            }
+        });
+
+        saveToFileYourWordButton.setBackground(new java.awt.Color(0, 153, 204));
+        saveToFileYourWordButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        saveToFileYourWordButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveToFileYourWordButton.setText("LƯU VÀO FILE");
+        saveToFileYourWordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveToFileYourWordButtonActionPerformed(evt);
+            }
+        });
+
+        readYourWordFromFile.setBackground(new java.awt.Color(0, 153, 204));
+        readYourWordFromFile.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        readYourWordFromFile.setForeground(new java.awt.Color(255, 255, 255));
+        readYourWordFromFile.setText("XUẤT VÀO FILE");
+        readYourWordFromFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readYourWordFromFileActionPerformed(evt);
+            }
+        });
+
+        saveChangeYourWordButton1.setBackground(new java.awt.Color(0, 153, 204));
+        saveChangeYourWordButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        saveChangeYourWordButton1.setForeground(new java.awt.Color(255, 255, 255));
+        saveChangeYourWordButton1.setText("THÊM TỪ");
+        saveChangeYourWordButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangeYourWordButton1ActionPerformed(evt);
+            }
+        });
+
+        addYourEngWordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addYourEngWordField.setForeground(new java.awt.Color(0, 0, 0));
+        addYourEngWordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addYourEngWordFieldActionPerformed(evt);
+            }
+        });
+        addYourEngWordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                addYourEngWordFieldKeyReleased(evt);
+            }
+        });
+
+        addYourVietWordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addYourVietWordField.setForeground(new java.awt.Color(0, 0, 0));
+        addYourVietWordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addYourVietWordFieldActionPerformed(evt);
+            }
+        });
+        addYourVietWordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                addYourVietWordFieldKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout YourWordTabLayout = new javax.swing.GroupLayout(YourWordTab);
+        YourWordTab.setLayout(YourWordTabLayout);
+        YourWordTabLayout.setHorizontalGroup(
+            YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, YourWordTabLayout.createSequentialGroup()
+                .addGroup(YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, YourWordTabLayout.createSequentialGroup()
+                        .addGroup(YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(YourWordTabLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(showAllEngSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(YourWordTabLayout.createSequentialGroup()
+                                .addGap(93, 93, 93)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addGap(89, 89, 89)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(YourWordTabLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveChangeYourWordButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(134, 134, 134))
+                    .addGroup(YourWordTabLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(inputYourEngWord)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, YourWordTabLayout.createSequentialGroup()
+                                .addComponent(showYourEngWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(showYourVietWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, YourWordTabLayout.createSequentialGroup()
+                                .addComponent(saveChangeYourWordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(deleteYourWordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, YourWordTabLayout.createSequentialGroup()
+                                .addComponent(saveToFileYourWordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(readYourWordFromFile, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, YourWordTabLayout.createSequentialGroup()
+                                .addComponent(addYourEngWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addYourVietWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+        );
+        YourWordTabLayout.setVerticalGroup(
+            YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(YourWordTabLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(inputYourEngWord, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(showAllEngSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showYourVietWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showYourEngWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveChangeYourWordButton)
+                    .addComponent(deleteYourWordButton))
+                .addGap(18, 18, 18)
+                .addGroup(YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveToFileYourWordButton)
+                    .addComponent(readYourWordFromFile))
+                .addGap(38, 38, 38)
+                .addGroup(YourWordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addYourVietWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addYourEngWordField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(saveChangeYourWordButton1)
+                .addContainerGap())
+        );
+
+        tabs.addTab("tab1", YourWordTab);
+
         getContentPane().add(tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -30, 520, 590));
 
         pack();
@@ -685,12 +919,99 @@ public class DictionaryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseSearchVietnameseActionPerformed
 
     private void chooseYourWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseYourWordsActionPerformed
-        // TODO add your handling code here:
+        unSelectAllMenuButtons();
+        chooseYourWords.setOpaque(true);
+        chooseYourWords.setBorderPainted(true);
+        tabs.setSelectedIndex(4);
     }//GEN-LAST:event_chooseYourWordsActionPerformed
 
     private void chooseGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chooseGameActionPerformed
+
+    private void inputYourEngWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputYourEngWordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputYourEngWordActionPerformed
+
+    private void inputYourEngWordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputYourEngWordKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            FindEngActionPerformed(null);
+            return;
+        } else if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            searchYourEngList.setListData(new SimpleDictionary.Word[1]);
+        }
+
+        var inputText = inputYourEngWord.getText();
+
+        if (inputText.equals("")) {
+            return;
+        }
+        List<SimpleDictionary.Word> wordsList = simpleDictionary.findAllWordContain(inputText);
+        SimpleDictionary.Word[] words = new SimpleDictionary.Word[wordsList.size()];
+        wordsList.toArray(words);
+        searchYourEngList.setListData(words);
+        System.out.println("Input:" + wordsList.size());
+    }//GEN-LAST:event_inputYourEngWordKeyReleased
+
+    private void saveChangeYourWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeYourWordButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveChangeYourWordButtonActionPerformed
+
+    private void searchYourEngListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchYourEngListMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchYourEngListMouseReleased
+
+    private void searchYourEngListKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchYourEngListKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchYourEngListKeyReleased
+
+    private void showYourVietWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showYourVietWordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showYourVietWordFieldActionPerformed
+
+    private void showYourVietWordFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_showYourVietWordFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showYourVietWordFieldKeyReleased
+
+    private void showYourEngWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showYourEngWordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showYourEngWordFieldActionPerformed
+
+    private void showYourEngWordFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_showYourEngWordFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showYourEngWordFieldKeyReleased
+
+    private void deleteYourWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteYourWordButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteYourWordButtonActionPerformed
+
+    private void saveToFileYourWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToFileYourWordButtonActionPerformed
+        simpleDictionary.saveToFile();
+    }//GEN-LAST:event_saveToFileYourWordButtonActionPerformed
+
+    private void readYourWordFromFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readYourWordFromFileActionPerformed
+        simpleDictionary.insertFromFile();
+    }//GEN-LAST:event_readYourWordFromFileActionPerformed
+
+    private void saveChangeYourWordButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeYourWordButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveChangeYourWordButton1ActionPerformed
+
+    private void addYourEngWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addYourEngWordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addYourEngWordFieldActionPerformed
+
+    private void addYourEngWordFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addYourEngWordFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addYourEngWordFieldKeyReleased
+
+    private void addYourVietWordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addYourVietWordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addYourVietWordFieldActionPerformed
+
+    private void addYourVietWordFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addYourVietWordFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addYourVietWordFieldKeyReleased
 
     private void unSelectAllMenuButtons() {
         for (javax.swing.JButton b : menuButtons) {
@@ -703,6 +1024,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         menuButtons.add(chooseSearchEnglish);
         menuButtons.add(chooseSearchOnline);
         menuButtons.add(chooseSearchVietnamese);
+        menuButtons.add(chooseYourWords);
     }
 
     private void showWord(Word word) {
@@ -753,16 +1075,23 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JButton FindEng;
     private javax.swing.JButton FindViet;
     private javax.swing.JButton VietEngOnlineButton;
+    private javax.swing.JPanel YourWordTab;
+    private javax.swing.JTextField addYourEngWordField;
+    private javax.swing.JTextField addYourVietWordField;
     private javax.swing.JButton chooseGame;
     private javax.swing.JButton chooseSearchEnglish;
     private javax.swing.JButton chooseSearchOnline;
     private javax.swing.JButton chooseSearchVietnamese;
     private javax.swing.JButton chooseYourWords;
+    private javax.swing.JButton deleteYourWordButton;
     private javax.swing.JPanel findEnglishWordTab;
     private javax.swing.JPanel findVietnameseWordTab;
     private javax.swing.JTextField inputEngWord;
     private javax.swing.JTextArea inputOnlineSearchTextArea;
     private javax.swing.JTextField inputViewWord;
+    private javax.swing.JTextField inputYourEngWord;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel menu;
@@ -771,11 +1100,19 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JPanel onlineSearchTab;
     private javax.swing.JTextArea outputOnlineSearchTextArea;
     private javax.swing.JLabel pronounce;
+    private javax.swing.JButton readYourWordFromFile;
+    private javax.swing.JButton saveChangeYourWordButton;
+    private javax.swing.JButton saveChangeYourWordButton1;
+    private javax.swing.JButton saveToFileYourWordButton;
     private javax.swing.JScrollPane scrollPaneExplain;
     private javax.swing.JList<Word> searchEngList;
     private javax.swing.JList<Word> searchVietList;
+    private javax.swing.JList<SimpleDictionary.Word> searchYourEngList;
     private javax.swing.JScrollPane showAllEngSearch;
+    private javax.swing.JScrollPane showAllEngSearch1;
     private javax.swing.JScrollPane showAllViewSearch;
+    private javax.swing.JTextField showYourEngWordField;
+    private javax.swing.JTextField showYourVietWordField;
     private javax.swing.JButton soundButton;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JEditorPane wordExplain;
