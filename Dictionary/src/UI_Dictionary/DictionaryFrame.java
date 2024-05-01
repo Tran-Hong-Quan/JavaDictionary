@@ -4,7 +4,7 @@
  */
 package UI_Dictionary;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -21,6 +21,7 @@ import javax.speech.Central;
 import javax.speech.EngineException;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
+import javax.swing.*;
 
 
 /**
@@ -34,6 +35,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private SimpleDictionary.DictionaryManagement simpleDictionary;
 
     private Synthesizer synthesizer;
+
     /**
      * Creates new form DictionaryFrame
      */
@@ -119,6 +121,10 @@ public class DictionaryFrame extends javax.swing.JFrame {
         saveChangeYourWordButton1 = new javax.swing.JButton();
         addYourEngWordField = new javax.swing.JTextField();
         addYourVietWordField = new javax.swing.JTextField();
+        gameTab = new javax.swing.JPanel();
+        translateGameButton = new javax.swing.JButton();
+        listenGameButton = new javax.swing.JButton();
+        gameTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(763, 570));
@@ -755,6 +761,52 @@ public class DictionaryFrame extends javax.swing.JFrame {
 
         tabs.addTab("tab1", YourWordTab);
 
+        gameTab.setBackground(new java.awt.Color(230, 230, 230));
+        translateGameButton.setBackground(new java.awt.Color(0, 153, 204));
+        translateGameButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        translateGameButton.setForeground(new java.awt.Color(255, 255, 255));
+        translateGameButton.setText("Dịch từ");
+
+        listenGameButton.setBackground(new java.awt.Color(0, 153, 204));
+        listenGameButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        listenGameButton.setForeground(new java.awt.Color(255, 255, 255));
+        listenGameButton.setText("Nghe đoán từ");
+
+        gameTitle.setText("Bắt đầu trò chơi của bạn");
+        gameTitle.setFont(new java.awt.Font("Dialog", 1, 20));
+
+        javax.swing.GroupLayout GameTabLayout = new javax.swing.GroupLayout(gameTab);
+        gameTab.setLayout(GameTabLayout);
+        GameTabLayout.setHorizontalGroup(
+                GameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(GameTabLayout.createSequentialGroup()
+                                .addGroup(GameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(GameTabLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addGap(26, 26, 26)
+                                                .addComponent(gameTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(GameTabLayout.createSequentialGroup()
+                                                .addGap(81, 81, 81)
+                                                .addGroup(GameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(translateGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(listenGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))))
+                                .addContainerGap(83, Short.MAX_VALUE))
+        );
+        GameTabLayout.setVerticalGroup(
+                GameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(GameTabLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(GameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(gameTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(translateGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(listenGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        tabs.addTab("gameTab", gameTab);
+
         getContentPane().add(tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -30, 520, 590));
 
         pack();
@@ -926,7 +978,10 @@ public class DictionaryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseYourWordsActionPerformed
 
     private void chooseGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGameActionPerformed
-        // TODO add your handling code here:
+        unSelectAllMenuButtons();
+        chooseGame.setOpaque(true);
+        chooseGame.setBorderPainted(true);
+        tabs.setSelectedIndex(5);
     }//GEN-LAST:event_chooseGameActionPerformed
 
     private void inputYourEngWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputYourEngWordActionPerformed
@@ -1025,6 +1080,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         menuButtons.add(chooseSearchOnline);
         menuButtons.add(chooseSearchVietnamese);
         menuButtons.add(chooseYourWords);
+        menuButtons.add(chooseGame);
     }
 
     private void showWord(Word word) {
@@ -1118,5 +1174,9 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JEditorPane wordExplain;
     private javax.swing.JLabel wordLabel;
     private javax.swing.JPanel wordTab;
+    private javax.swing.JPanel gameTab;
+    private javax.swing.JButton translateGameButton;
+    private javax.swing.JButton listenGameButton;
+    private javax.swing.JLabel gameTitle;
     // End of variables declaration//GEN-END:variables
 }
