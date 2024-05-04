@@ -17,10 +17,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import javax.speech.Central;
 import javax.speech.EngineException;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
+import javax.swing.*;
+
 
 /**
  *
@@ -32,6 +35,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private List<javax.swing.JButton> menuButtons = new ArrayList<>();
     private SimpleDictionary.DictionaryManagement simpleDictionary;
     private SimpleDictionary.Word yourCurrentWord = null;
+    private GameUtils utils;
 
     private Synthesizer synthesizer;
 
@@ -43,6 +47,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         initComponents();
         dictionary = Dictionary.instance;
         initMenuButton();
+        utils = new GameUtils();
         chooseSearchEnglishActionPerformed(null);
         simpleDictionary = new SimpleDictionary.DictionaryManagement();
         simpleDictionary.insertFromFile();
@@ -121,6 +126,21 @@ public class DictionaryFrame extends javax.swing.JFrame {
         saveChangeYourWordButton1 = new javax.swing.JButton();
         addYourEngWordField = new javax.swing.JTextField();
         addYourVietWordField = new javax.swing.JTextField();
+        pGameTab = new javax.swing.JPanel();
+        AnswerC = new javax.swing.JButton();
+        AnswerD = new javax.swing.JButton();
+        AnswerA = new javax.swing.JButton();
+        AnswerB = new javax.swing.JButton();
+        description = new javax.swing.JLabel();
+        scoreTitle = new javax.swing.JLabel();
+        score = new javax.swing.JLabel();
+        remaningQuestionTitle = new javax.swing.JLabel();
+        remainingQuestion = new javax.swing.JLabel();
+        playSound = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        translateGameButton = new javax.swing.JButton();
+        listenGameButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(763, 570));
@@ -757,11 +777,206 @@ public class DictionaryFrame extends javax.swing.JFrame {
 
         tabs.addTab("tab1", YourWordTab);
 
+        AnswerC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnswerCActionPerformed(evt);
+            }
+        });
+
+        AnswerD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnswerDActionPerformed(evt);
+            }
+        });
+
+        AnswerA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnswerAActionPerformed(evt);
+            }
+        });
+
+        AnswerB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnswerBActionPerformed(evt);
+            }
+        });
+
+        description.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        description.setBounds(110, 170, 340, 80);
+        description.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        description.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 123, 170), 2, true));
+
+        scoreTitle.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        scoreTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreTitle.setText("Điểm của bạn");
+        scoreTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 123, 170), 2, true));
+
+        score.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        score.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 123, 170), 2, true));
+
+        remaningQuestionTitle.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        remaningQuestionTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        remaningQuestionTitle.setText("Câu hỏi còn lại");
+        remaningQuestionTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 123, 170), 2, true));
+
+        remainingQuestion.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        remainingQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        remainingQuestion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 123, 170), 2, true));
+
+        playSound.setBackground(new java.awt.Color(0, 123, 170));
+        playSound.setForeground(new java.awt.Color(253, 253, 253));
+        playSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Speaker_Icon.png"))); // NOI18N
+        playSound.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playSoundActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pGameTabLayout = new javax.swing.GroupLayout(pGameTab);
+        pGameTab.setLayout(pGameTabLayout);
+        pGameTabLayout.setHorizontalGroup(
+            pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pGameTabLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pGameTabLayout.createSequentialGroup()
+                        .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(remaningQuestionTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                            .addComponent(scoreTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 57, Short.MAX_VALUE)
+                        .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(remainingQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(score, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(80, 80, 80))
+                    .addGroup(pGameTabLayout.createSequentialGroup()
+                        .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pGameTabLayout.createSequentialGroup()
+                                .addComponent(AnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(AnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(AnswerB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(67, 67, 67))
+                    .addGroup(pGameTabLayout.createSequentialGroup()
+                        .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pGameTabLayout.createSequentialGroup()
+                                .addComponent(playSound, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        pGameTabLayout.setVerticalGroup(
+            pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pGameTabLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scoreTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(score, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(remaningQuestionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(remainingQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(description, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(playSound, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AnswerB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(185, Short.MAX_VALUE))
+        );
+
+        tabs.addTab("tab6", pGameTab);
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Chọn một trò chơi để bắt đầu:");
+
+        translateGameButton.setBackground(new java.awt.Color(0, 123, 170));
+        translateGameButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        translateGameButton.setForeground(new java.awt.Color(255, 255, 255));
+        translateGameButton.setText("Dịch từ");
+        translateGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateGameButtonActionPerformed(evt);
+            }
+        });
+
+        listenGameButton.setBackground(new java.awt.Color(0, 123, 170));
+        listenGameButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        listenGameButton.setForeground(new java.awt.Color(255, 255, 255));
+        listenGameButton.setText("Nghe đoán từ");
+        listenGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listenGameButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(listenGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(translateGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(translateGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(listenGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(183, Short.MAX_VALUE))
+        );
+
+        tabs.addTab("tab7", jPanel1);
+
         getContentPane().add(tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -30, 520, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void showListenGame() {
+        utils.setGameType("listen");
+        AnswerA.setBackground(Color.WHITE);
+        AnswerB.setBackground(Color.WHITE);
+        AnswerC.setBackground(Color.WHITE);
+        AnswerD.setBackground(Color.WHITE);
+
+        tabs.setSelectedIndex(5);
+        description.setVisible(false);
+        playSound.setVisible(true);
+        score.setText(utils.getCorrectChoices()+"");
+        remainingQuestion.setText(utils.getRemainingQuestion() + "");
+        utils.loadRandomQuestion(Dictionary.getEngToViet());
+        AnswerA.setText(utils.getChoices().get(0).getWord());
+        AnswerB.setText(utils.getChoices().get(1).getWord());
+        AnswerC.setText(utils.getChoices().get(2).getWord());
+        AnswerD.setText(utils.getChoices().get(3).getWord());
+    }
+
+
+    private void playSoundActionPerformed(ActionEvent evt) {
+        Word w = utils.getAnswer();
+        if (w == null) {
+            return;
+        }
+        w.playPronunciation(synthesizer);
+    }
     private void soundButtonActionPerformed(ActionEvent evt) {
         Word w = dictionary.findEngWord(wordLabel.getText());
         if (w == null) {
@@ -931,7 +1146,12 @@ public class DictionaryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseYourWordsActionPerformed
 
     private void chooseGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGameActionPerformed
-        // TODO add your handling code here:
+        unSelectAllMenuButtons();
+        chooseGame.setOpaque(true);
+        chooseGame.setBorderPainted(true);
+        utils.setRemainingQuestion(5);
+        utils.setCorrectChoices(0);
+        tabs.setSelectedIndex(6);
     }//GEN-LAST:event_chooseGameActionPerformed
 
     private void inputYourEngWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputYourEngWordActionPerformed
@@ -951,6 +1171,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
 
     private void showYourWordsInSearchList() {
         var inputText = inputYourEngWord.getText();
+
         if (inputText.equals("")) {
             return;
         }
@@ -1064,6 +1285,30 @@ public class DictionaryFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addYourVietWordFieldKeyReleased
 
+    private void AnswerAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerAActionPerformed
+        chooseAnswer(1);
+    }//GEN-LAST:event_AnswerAActionPerformed
+
+    private void AnswerBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerBActionPerformed
+        chooseAnswer(2);
+    }//GEN-LAST:event_AnswerBActionPerformed
+
+    private void translateGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateGameButtonActionPerformed
+        showTranslateGame();
+    }//GEN-LAST:event_translateGameButtonActionPerformed
+
+    private void listenGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listenGameButtonActionPerformed
+        showListenGame();
+    }//GEN-LAST:event_listenGameButtonActionPerformed
+
+    private void AnswerCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerCActionPerformed
+        chooseAnswer(3);
+    }//GEN-LAST:event_AnswerCActionPerformed
+
+    private void AnswerDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerDActionPerformed
+        chooseAnswer(4);
+    }//GEN-LAST:event_AnswerDActionPerformed
+
     private void unSelectAllMenuButtons() {
         for (javax.swing.JButton b : menuButtons) {
             b.setOpaque(false);
@@ -1076,6 +1321,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         menuButtons.add(chooseSearchOnline);
         menuButtons.add(chooseSearchVietnamese);
         menuButtons.add(chooseYourWords);
+        menuButtons.add(chooseGame);
     }
 
     private void showWord(Word word) {
@@ -1084,8 +1330,49 @@ public class DictionaryFrame extends javax.swing.JFrame {
         wordLabel.setText(word.getWord());
         pronounce.setText(word.getPronounce());
         wordExplain.setText(word.getDescription() + word.getHtml());
+        System.out.println(word.getDescription());
     }
+    private void chooseAnswer(int i) {
+        utils.chooseAnswer(i - 1);
+        score.setText(String.valueOf(utils.getCorrectChoices()));
+        remainingQuestion.setText(String.valueOf(utils.getRemainingQuestion()));
+        tabs.setSelectedIndex(5);
+        if (utils.getRemainingQuestion() == 0) {
+            JOptionPane.showMessageDialog(this, "Kết thúc trò chơi. Điểm của bạn là " + utils.getCorrectChoices());
+            utils.setRemainingQuestion(5);
+            utils.setCorrectChoices(0);
+            tabs.setSelectedIndex(6);
+            return;
+        }
+        if (utils.getGameType().equals("listen")) {
+            showListenGame();
+        } else {
+            showTranslateGame();
+        }
+    }
+    private void showTranslateGame(){
+        utils.setGameType("translate");
+        tabs.setSelectedIndex(5);
 
+        description.setVisible(true);
+        playSound.setVisible(false);
+        utils.loadRandomQuestion(Dictionary.getEngToViet());
+        List<Word> choices = utils.getChoices();
+
+        description.setText(utils.getDescription());
+        AnswerA.setText(choices.get(0).getWord());
+        AnswerB.setText(choices.get(1).getWord());
+        AnswerC.setText(choices.get(2).getWord());
+        AnswerD.setText(choices.get(3).getWord());
+
+        AnswerA.setBackground(new java.awt.Color(253, 253, 253));
+        AnswerB.setBackground(new java.awt.Color(253, 253, 253));
+        AnswerC.setBackground(new java.awt.Color(253, 253, 253));
+        AnswerD.setBackground(new java.awt.Color(253, 253, 253));
+
+        score.setText(String.valueOf(utils.getCorrectChoices()));
+        remainingQuestion.setText(String.valueOf(utils.getRemainingQuestion()));
+    }
     /**
      * @param args the command line arguments
      */
@@ -1122,6 +1409,10 @@ public class DictionaryFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AnswerA;
+    private javax.swing.JButton AnswerB;
+    private javax.swing.JButton AnswerC;
+    private javax.swing.JButton AnswerD;
     private javax.swing.JButton EngVietOnlineButton;
     private javax.swing.JButton FindEng;
     private javax.swing.JButton FindViet;
@@ -1135,6 +1426,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JButton chooseSearchVietnamese;
     private javax.swing.JButton chooseYourWords;
     private javax.swing.JButton deleteYourWordButton;
+    private javax.swing.JLabel description;
     private javax.swing.JPanel findEnglishWordTab;
     private javax.swing.JPanel findVietnameseWordTab;
     private javax.swing.JTextField inputEngWord;
@@ -1143,18 +1435,27 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JTextField inputYourEngWord;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton listenGameButton;
     private javax.swing.JPanel menu;
     private javax.swing.JLabel nameApp;
     private javax.swing.JLabel nameApp1;
     private javax.swing.JPanel onlineSearchTab;
     private javax.swing.JTextArea outputOnlineSearchTextArea;
+    private javax.swing.JPanel pGameTab;
+    private javax.swing.JButton playSound;
     private javax.swing.JLabel pronounce;
     private javax.swing.JButton readYourWordFromFile;
+    private javax.swing.JLabel remainingQuestion;
+    private javax.swing.JLabel remaningQuestionTitle;
     private javax.swing.JButton saveChangeYourWordButton;
     private javax.swing.JButton saveChangeYourWordButton1;
     private javax.swing.JButton saveToFileYourWordButton;
+    private javax.swing.JLabel score;
+    private javax.swing.JLabel scoreTitle;
     private javax.swing.JScrollPane scrollPaneExplain;
     private javax.swing.JList<Word> searchEngList;
     private javax.swing.JList<Word> searchVietList;
@@ -1166,6 +1467,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JTextField showYourVietWordField;
     private javax.swing.JButton soundButton;
     private javax.swing.JTabbedPane tabs;
+    private javax.swing.JButton translateGameButton;
     private javax.swing.JEditorPane wordExplain;
     private javax.swing.JLabel wordLabel;
     private javax.swing.JPanel wordTab;
