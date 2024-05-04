@@ -29,6 +29,9 @@ public class Dictionary {
 
     }
 
+    public static List <Word> getEngToViet(){
+        return instance.engToViet;
+    }
     private Connection connect() {
         Connection conn = null;
         try {
