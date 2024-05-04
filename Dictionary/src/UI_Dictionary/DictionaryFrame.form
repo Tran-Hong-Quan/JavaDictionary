@@ -992,7 +992,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="XU&#x1ea4;T V&#xc0;O FILE"/>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x1ecc;C T&#x1eea; FILE"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="readYourWordFromFileActionPerformed"/>
