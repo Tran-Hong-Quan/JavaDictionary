@@ -24,7 +24,6 @@ import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 import javax.swing.*;
 
-
 /**
  *
  * @author Tran Hong Quan
@@ -36,6 +35,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private SimpleDictionary.DictionaryManagement simpleDictionary;
     private SimpleDictionary.Word yourCurrentWord = null;
     private GameUtils utils;
+    private JButton[] gameAnswerButtons;
 
     private Synthesizer synthesizer;
 
@@ -51,6 +51,16 @@ public class DictionaryFrame extends javax.swing.JFrame {
         chooseSearchEnglishActionPerformed(null);
         simpleDictionary = new SimpleDictionary.DictionaryManagement();
         simpleDictionary.insertFromFile();
+        initGameAnswerButtons();
+    }
+
+    private void initGameAnswerButtons() {
+        gameAnswerButtons = new JButton[]{
+            AnswerA,
+            AnswerB,
+            AnswerC,
+            AnswerD
+        };
     }
 
     /**
@@ -137,6 +147,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         remaningQuestionTitle = new javax.swing.JLabel();
         remainingQuestion = new javax.swing.JLabel();
         playSound = new javax.swing.JButton();
+        gameNextQuestionButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         translateGameButton = new javax.swing.JButton();
@@ -295,7 +306,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         findEnglishWordTab.setBackground(new java.awt.Color(230, 230, 230));
 
         inputEngWord.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        inputEngWord.setForeground(new java.awt.Color(0, 0, 0));
         inputEngWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputEngWordActionPerformed(evt);
@@ -318,7 +328,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         });
 
         searchEngList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        searchEngList.setForeground(new java.awt.Color(0, 0, 0));
         searchEngList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         searchEngList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -363,7 +372,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         findVietnameseWordTab.setBackground(new java.awt.Color(230, 230, 230));
 
         inputViewWord.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        inputViewWord.setForeground(new java.awt.Color(0, 0, 0));
         inputViewWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputViewWordActionPerformed(evt);
@@ -386,7 +394,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         });
 
         searchVietList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        searchVietList.setForeground(new java.awt.Color(0, 0, 0));
         searchVietList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         searchVietList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -505,7 +512,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
 
         wordLabel.setBackground(new java.awt.Color(255, 255, 255));
         wordLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        wordLabel.setForeground(new java.awt.Color(0, 0, 0));
         wordLabel.setText("Nothing");
         wordLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         wordLabel.setOpaque(true);
@@ -564,7 +570,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         YourWordTab.setBackground(new java.awt.Color(230, 230, 230));
 
         inputYourEngWord.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        inputYourEngWord.setForeground(new java.awt.Color(0, 0, 0));
         inputYourEngWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputYourEngWordActionPerformed(evt);
@@ -577,7 +582,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         });
 
         searchYourEngList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        searchYourEngList.setForeground(new java.awt.Color(0, 0, 0));
         searchYourEngList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         searchYourEngList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -598,7 +602,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         jLabel2.setText("Tiếng Việt");
 
         showYourVietWordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        showYourVietWordField.setForeground(new java.awt.Color(0, 0, 0));
         showYourVietWordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showYourVietWordFieldActionPerformed(evt);
@@ -611,7 +614,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         });
 
         showYourEngWordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        showYourEngWordField.setForeground(new java.awt.Color(0, 0, 0));
         showYourEngWordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showYourEngWordFieldActionPerformed(evt);
@@ -674,7 +676,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         });
 
         addYourEngWordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addYourEngWordField.setForeground(new java.awt.Color(0, 0, 0));
         addYourEngWordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addYourEngWordFieldActionPerformed(evt);
@@ -687,7 +688,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         });
 
         addYourVietWordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addYourVietWordField.setForeground(new java.awt.Color(0, 0, 0));
         addYourVietWordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addYourVietWordFieldActionPerformed(evt);
@@ -801,9 +801,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
             }
         });
 
-        description.setFont(new java.awt.Font("Segoe UI", 1, 15));
-        description.setBounds(110, 170, 340, 80);
-        description.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        description.setFont(new java.awt.Font("Segoe UI", 1, 15)); description.setBounds(110, 170, 340, 80); description.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         description.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 123, 170), 2, true));
 
         scoreTitle.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -833,6 +831,13 @@ public class DictionaryFrame extends javax.swing.JFrame {
             }
         });
 
+        gameNextQuestionButton.setText("Câu Tiếp");
+        gameNextQuestionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gameNextQuestionButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pGameTabLayout = new javax.swing.GroupLayout(pGameTab);
         pGameTab.setLayout(pGameTabLayout);
         pGameTabLayout.setHorizontalGroup(
@@ -841,30 +846,34 @@ public class DictionaryFrame extends javax.swing.JFrame {
                 .addGap(70, 70, 70)
                 .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pGameTabLayout.createSequentialGroup()
-                        .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(remaningQuestionTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                            .addComponent(scoreTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 57, Short.MAX_VALUE)
+                        .addComponent(AnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(285, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pGameTabLayout.createSequentialGroup()
                         .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(remainingQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(score, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80))
-                    .addGroup(pGameTabLayout.createSequentialGroup()
-                        .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pGameTabLayout.createSequentialGroup()
-                                .addComponent(AnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(remaningQuestionTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                                    .addComponent(scoreTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(AnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(AnswerB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(67, 67, 67))
-                    .addGroup(pGameTabLayout.createSequentialGroup()
-                        .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(remainingQuestion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(score, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pGameTabLayout.createSequentialGroup()
                                 .addComponent(playSound, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(description, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pGameTabLayout.createSequentialGroup()
+                                .addComponent(AnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(AnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pGameTabLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(AnswerB, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(67, 67, 67))))
+            .addGroup(pGameTabLayout.createSequentialGroup()
+                .addGap(191, 191, 191)
+                .addComponent(gameNextQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pGameTabLayout.setVerticalGroup(
             pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -877,11 +886,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
                 .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(remaningQuestionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(remainingQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(54, 54, 54)
                 .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(description, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(playSound, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
+                    .addComponent(playSound, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
                 .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AnswerB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -889,7 +898,9 @@ public class DictionaryFrame extends javax.swing.JFrame {
                 .addGroup(pGameTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(gameNextQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         tabs.addTab("tab6", pGameTab);
@@ -949,7 +960,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void showListenGame() {
         utils.setGameType("listen");
         AnswerA.setBackground(Color.WHITE);
@@ -960,7 +970,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         tabs.setSelectedIndex(5);
         description.setVisible(false);
         playSound.setVisible(true);
-        score.setText(utils.getCorrectChoices()+"");
+        score.setText(utils.getCorrectChoices() + "");
         remainingQuestion.setText(utils.getRemainingQuestion() + "");
         utils.loadRandomQuestion(Dictionary.getEngToViet());
         AnswerA.setText(utils.getChoices().get(0).getWord());
@@ -969,14 +979,6 @@ public class DictionaryFrame extends javax.swing.JFrame {
         AnswerD.setText(utils.getChoices().get(3).getWord());
     }
 
-
-    private void playSoundActionPerformed(ActionEvent evt) {
-        Word w = utils.getAnswer();
-        if (w == null) {
-            return;
-        }
-        w.playPronunciation(synthesizer);
-    }
     private void soundButtonActionPerformed(ActionEvent evt) {
         Word w = dictionary.findEngWord(wordLabel.getText());
         if (w == null) {
@@ -1152,6 +1154,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         utils.setRemainingQuestion(5);
         utils.setCorrectChoices(0);
         tabs.setSelectedIndex(6);
+        gameNextQuestionButton.setVisible(false);
     }//GEN-LAST:event_chooseGameActionPerformed
 
     private void inputYourEngWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputYourEngWordActionPerformed
@@ -1286,11 +1289,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addYourVietWordFieldKeyReleased
 
     private void AnswerAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerAActionPerformed
-        chooseAnswer(1);
+        chooseAnswer(0);
     }//GEN-LAST:event_AnswerAActionPerformed
 
     private void AnswerBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerBActionPerformed
-        chooseAnswer(2);
+        chooseAnswer(1);
     }//GEN-LAST:event_AnswerBActionPerformed
 
     private void translateGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateGameButtonActionPerformed
@@ -1302,12 +1305,29 @@ public class DictionaryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_listenGameButtonActionPerformed
 
     private void AnswerCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerCActionPerformed
-        chooseAnswer(3);
+        chooseAnswer(2);
     }//GEN-LAST:event_AnswerCActionPerformed
 
     private void AnswerDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerDActionPerformed
-        chooseAnswer(4);
+        chooseAnswer(3);
     }//GEN-LAST:event_AnswerDActionPerformed
+
+    private void playSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playSoundActionPerformed
+        Word w = utils.getAnswer();
+        if (w == null) {
+            return;
+        }
+        w.playPronunciation(synthesizer);
+    }//GEN-LAST:event_playSoundActionPerformed
+
+    private void gameNextQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameNextQuestionButtonActionPerformed
+        if (utils.getGameType().equals("listen")) {
+            showListenGame();
+        } else {
+            showTranslateGame();
+        }
+        gameNextQuestionButton.setVisible(false);
+    }//GEN-LAST:event_gameNextQuestionButtonActionPerformed
 
     private void unSelectAllMenuButtons() {
         for (javax.swing.JButton b : menuButtons) {
@@ -1332,10 +1352,16 @@ public class DictionaryFrame extends javax.swing.JFrame {
         wordExplain.setText(word.getDescription() + word.getHtml());
         System.out.println(word.getDescription());
     }
+
     private void chooseAnswer(int i) {
-        utils.chooseAnswer(i - 1);
+        if (gameNextQuestionButton.isVisible()) {
+            return;
+        }
+        utils.chooseAnswer(i);
         score.setText(String.valueOf(utils.getCorrectChoices()));
         remainingQuestion.setText(String.valueOf(utils.getRemainingQuestion()));
+        gameAnswerButtons[i].setBackground(Color.RED);
+        gameAnswerButtons[utils.getCorrectAnswer()].setBackground(Color.GREEN);
         tabs.setSelectedIndex(5);
         if (utils.getRemainingQuestion() == 0) {
             JOptionPane.showMessageDialog(this, "Kết thúc trò chơi. Điểm của bạn là " + utils.getCorrectChoices());
@@ -1344,13 +1370,10 @@ public class DictionaryFrame extends javax.swing.JFrame {
             tabs.setSelectedIndex(6);
             return;
         }
-        if (utils.getGameType().equals("listen")) {
-            showListenGame();
-        } else {
-            showTranslateGame();
-        }
+        gameNextQuestionButton.setVisible(true);
     }
-    private void showTranslateGame(){
+
+    private void showTranslateGame() {
         utils.setGameType("translate");
         tabs.setSelectedIndex(5);
 
@@ -1373,6 +1396,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         score.setText(String.valueOf(utils.getCorrectChoices()));
         remainingQuestion.setText(String.valueOf(utils.getRemainingQuestion()));
     }
+
     /**
      * @param args the command line arguments
      */
@@ -1429,6 +1453,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel description;
     private javax.swing.JPanel findEnglishWordTab;
     private javax.swing.JPanel findVietnameseWordTab;
+    private javax.swing.JButton gameNextQuestionButton;
     private javax.swing.JTextField inputEngWord;
     private javax.swing.JTextArea inputOnlineSearchTextArea;
     private javax.swing.JTextField inputViewWord;
