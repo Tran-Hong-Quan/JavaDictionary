@@ -642,8 +642,8 @@
                               <Component id="wordLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="138" max="32767" attributes="0"/>
                               <Component id="pronounce" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="soundButton" min="-2" pref="43" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="soundButton" min="-2" pref="49" max="-2" attributes="0"/>
                           </Group>
                           <Component id="scrollPaneExplain" max="32767" attributes="0"/>
                       </Group>
@@ -655,12 +655,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="wordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="pronounce" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="soundButton" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="soundButton" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="scrollPaneExplain" min="-2" pref="444" max="-2" attributes="0"/>
@@ -706,6 +706,9 @@
                 <Property name="opaque" type="boolean" value="true"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="wordLabelMouseReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="pronounce">
               <Properties>
@@ -726,6 +729,9 @@
                 <Property name="opaque" type="boolean" value="true"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pronounceMouseReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="soundButton">
               <Properties>

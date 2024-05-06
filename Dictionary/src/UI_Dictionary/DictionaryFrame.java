@@ -516,6 +516,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
         wordLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         wordLabel.setOpaque(true);
         wordLabel.setVerifyInputWhenFocusTarget(false);
+        wordLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                wordLabelMouseReleased(evt);
+            }
+        });
 
         pronounce.setBackground(new java.awt.Color(255, 255, 255));
         pronounce.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -525,6 +530,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
         pronounce.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         pronounce.setOpaque(true);
         pronounce.setVerifyInputWhenFocusTarget(false);
+        pronounce.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                pronounceMouseReleased(evt);
+            }
+        });
 
         soundButton.setBackground(new java.awt.Color(0, 153, 204));
         soundButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Speaker_Icon.png"))); // NOI18N
@@ -546,8 +556,8 @@ public class DictionaryFrame extends javax.swing.JFrame {
                         .addComponent(wordLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                         .addComponent(pronounce)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(soundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(soundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(scrollPaneExplain))
                 .addContainerGap())
         );
@@ -555,11 +565,11 @@ public class DictionaryFrame extends javax.swing.JFrame {
             wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(wordTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(wordTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(wordLabel)
                         .addComponent(pronounce))
-                    .addComponent(soundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(soundButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(scrollPaneExplain, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -1005,7 +1015,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         if (evt.getKeyCode() != KeyEvent.VK_ENTER) {
             return;
         }
-        showWord(searchEngList.getSelectedValue());
+        showWord(searchEngList.getSelectedValue(), 0);
     }//GEN-LAST:event_searchEngListKeyReleased
 
     private void searchEngListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchEngListMouseReleased
@@ -1016,7 +1026,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         int index = target.locationToIndex(evt.getPoint());
         if (index >= 0) {
             Word item = target.getModel().getElementAt(index);
-            showWord(item);
+            showWord(item, 0);
         }
     }//GEN-LAST:event_searchEngListMouseReleased
 
@@ -1025,7 +1035,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         if (w == null) {
             return;
         }
-        showWord(w);
+        showWord(w, 0);
     }//GEN-LAST:event_FindEngActionPerformed
 
     private void inputEngWordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputEngWordKeyReleased
@@ -1075,7 +1085,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         if (w == null) {
             return;
         }
-        showWord(w);
+        showWord(w, 1);
     }//GEN-LAST:event_FindVietActionPerformed
 
     private void searchVietListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchVietListMouseReleased
@@ -1086,7 +1096,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         int index = target.locationToIndex(evt.getPoint());
         if (index >= 0) {
             Word item = target.getModel().getElementAt(index);
-            showWord(item);
+            showWord(item, 1);
         }
     }//GEN-LAST:event_searchVietListMouseReleased
 
@@ -1094,7 +1104,7 @@ public class DictionaryFrame extends javax.swing.JFrame {
         if (evt.getKeyCode() != KeyEvent.VK_ENTER) {
             return;
         }
-        showWord(searchEngList.getSelectedValue());
+        showWord(searchEngList.getSelectedValue(), 1);
     }//GEN-LAST:event_searchVietListKeyReleased
 
     private void VietEngOnlineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VietEngOnlineButtonActionPerformed
@@ -1329,6 +1339,18 @@ public class DictionaryFrame extends javax.swing.JFrame {
         gameNextQuestionButton.setVisible(false);
     }//GEN-LAST:event_gameNextQuestionButtonActionPerformed
 
+    private void wordLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_wordLabelMouseReleased
+        if (callerTab == -1) {
+            return;
+        }
+        tabs.setSelectedIndex(callerTab);
+        callerTab = -1;
+    }//GEN-LAST:event_wordLabelMouseReleased
+
+    private void pronounceMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pronounceMouseReleased
+        wordLabelMouseReleased(evt);
+    }//GEN-LAST:event_pronounceMouseReleased
+
     private void unSelectAllMenuButtons() {
         for (javax.swing.JButton b : menuButtons) {
             b.setOpaque(false);
@@ -1344,7 +1366,10 @@ public class DictionaryFrame extends javax.swing.JFrame {
         menuButtons.add(chooseGame);
     }
 
-    private void showWord(Word word) {
+    private int callerTab = -1;
+
+    private void showWord(Word word, int callerTab) {
+        this.callerTab = callerTab;
         tabs.setSelectedIndex(3);
         System.out.println("Show " + word.getPronounce());
         wordLabel.setText(word.getWord());

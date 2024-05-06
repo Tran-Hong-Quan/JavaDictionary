@@ -29,9 +29,10 @@ public class Dictionary {
 
     }
 
-    public static List <Word> getEngToViet(){
+    public static List<Word> getEngToViet() {
         return instance.engToViet;
     }
+
     private Connection connect() {
         Connection conn = null;
         try {
@@ -67,6 +68,13 @@ public class Dictionary {
                 engToViet.add(new Word(id, word, html, pronounce, description));
             }
 
+            Collections.sort(engToViet, new Comparator<Word>() {
+                @Override
+                public int compare(Word s1, Word s2) {
+                    return s1.getWord().compareTo(s2.getWord());
+                }
+            });
+
             stmt = conn.createStatement();
             rs = stmt.executeQuery(selectVietData);
 
@@ -79,6 +87,13 @@ public class Dictionary {
                 String html = rs.getString("html");
                 vietToEng.add(new Word(id, word, html, pronounce, description));
             }
+            
+            Collections.sort(vietToEng, new Comparator<Word>() {
+                @Override
+                public int compare(Word s1, Word s2) {
+                    return s1.getWord().compareTo(s2.getWord());
+                }
+            });
 
             return true;
         } catch (SQLException e) {
@@ -107,11 +122,24 @@ public class Dictionary {
     }
 
     public Word findEngWord(String find) {
-        for (Word w : engToViet) {
-            if (w.getWord().equals(find)) {
-                return w;
+        int left = 0;
+        int right = engToViet.size() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            String midWord = engToViet.get(mid).getWord();
+
+            int compareResult = midWord.compareTo(find);
+
+            if (compareResult == 0) {
+                return engToViet.get(mid);
+            } else if (compareResult < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
+
         return null;
     }
 
@@ -150,4 +178,5 @@ public class Dictionary {
         DictionaryFrame dicFrame = new DictionaryFrame();
         dicFrame.setVisible(true);
     }
+
 }
