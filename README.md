@@ -1,3 +1,4 @@
+# JAVA DICTIONARY
 This project is a Dictionary which translate English to Vietnamese and vice versa.
 Dictionary is written in Java by a group of three people.
 Users can:
