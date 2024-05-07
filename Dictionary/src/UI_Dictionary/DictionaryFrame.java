@@ -54,6 +54,9 @@ public class DictionaryFrame extends javax.swing.JFrame {
         initGameAnswerButtons();
     }
 
+    /**
+     * Init Game Answer Buttons.
+     */
     private void initGameAnswerButtons() {
         gameAnswerButtons = new JButton[]{
             AnswerA,
