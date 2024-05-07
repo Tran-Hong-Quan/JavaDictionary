@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI_Dictionary;
 
 import java.awt.event.KeyEvent;
 
 /**
- *
  * @author Quan
  */
 public class MainFrame extends javax.swing.JFrame {
@@ -122,6 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(Name, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
         );
+         
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
