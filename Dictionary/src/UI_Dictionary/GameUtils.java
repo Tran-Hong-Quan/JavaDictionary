@@ -12,6 +12,7 @@ public class GameUtils {
     private int remainingQuestion;
     private String description;
     private String gameType;
+    
     public GameUtils(){
         remainingQuestion = 5;
         correctChoices = 0;
